@@ -1,6 +1,6 @@
-class CreateEmployees < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.0]
   def change
-    create_table :employees do |t|
+    create_table :users do |t|
       t.timestamps null: false
       t.belongs_to :company, index: true
       t.string  :first_name, null: false
@@ -13,9 +13,10 @@ class CreateEmployees < ActiveRecord::Migration[5.0]
       t.string  :confirmation_token, limit: 128
       t.string  :remember_token, limit: 128, null: false
       t.string  :private_token
+      t.string  :profile_picture
     end
 
-    add_index :employees, :email
-    add_index :employees, :remember_token
+    add_index :users, :email
+    add_index :users, :remember_token
   end
 end
