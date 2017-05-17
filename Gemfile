@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Clearance for user authentication
 gem "clearance"
+# Faker for seeding
+gem "faker"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
