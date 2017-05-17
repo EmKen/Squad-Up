@@ -18,36 +18,9 @@ ActiveRecord::Schema.define(version: 20170517034442) do
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.string   "admin_email"
+    t.string   "logo"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "user_skills", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "skill_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_user_skills_on_user_id", using: :btree
-    t.index ["skill_id"], name: "index_user_skills_on_skill_id", using: :btree
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.integer  "company_id"
-    t.string   "first_name",                                 null: false
-    t.string   "last_name",                                  null: false
-    t.string   "job_title",                                  null: false
-    t.string   "department",                                 null: false
-    t.integer  "access_level",                   default: 0
-    t.string   "email",                                      null: false
-    t.string   "encrypted_password", limit: 128,             null: false
-    t.string   "confirmation_token", limit: 128
-    t.string   "remember_token",     limit: 128,             null: false
-    t.string   "private_token"
-    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
-    t.index ["email"], name: "index_users_on_email", using: :btree
-    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
   create_table "project_skills", force: :cascade do |t|
@@ -61,9 +34,9 @@ ActiveRecord::Schema.define(version: 20170517034442) do
     t.integer "project_id"
     t.integer "user_id"
     t.integer "project_skill_id"
-    t.index ["user_id"], name: "index_project_team_members_on_user_id", using: :btree
     t.index ["project_id"], name: "index_project_team_members_on_project_id", using: :btree
     t.index ["project_skill_id"], name: "index_project_team_members_on_project_skill_id", using: :btree
+    t.index ["user_id"], name: "index_project_team_members_on_user_id", using: :btree
   end
 
   create_table "projects", force: :cascade do |t|
@@ -80,6 +53,35 @@ ActiveRecord::Schema.define(version: 20170517034442) do
   create_table "skills", force: :cascade do |t|
     t.string "skill_name"
     t.string "category"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id", using: :btree
+    t.index ["user_id"], name: "index_user_skills_on_user_id", using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "company_id"
+    t.string   "first_name",                                 null: false
+    t.string   "last_name",                                  null: false
+    t.string   "job_title",                                  null: false
+    t.string   "department",                                 null: false
+    t.integer  "access_level",                   default: 0
+    t.string   "email",                                      null: false
+    t.string   "encrypted_password", limit: 128,             null: false
+    t.string   "confirmation_token", limit: 128
+    t.string   "remember_token",     limit: 128,             null: false
+    t.string   "private_token"
+    t.string   "profile_picture"
+    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
 end
