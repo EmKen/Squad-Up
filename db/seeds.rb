@@ -47,8 +47,8 @@ end
 
 
 
-employee = {}
-employee['password'] = 'password'
+user = {}
+user['password'] = 'password'
 departments = ["Sales", "Marketing", "Finance"]
 skill_ids = (1..36).to_a
 first_name = Faker::Name.first_name 
@@ -60,32 +60,32 @@ ActiveRecord::Base.transaction do
 end
 
 ActiveRecord::Base.transaction do
-  employee['first_name'] = first_name 
-  employee['last_name'] = last_name
-  employee['email'] = email
-  employee['company_id'] = 1
-  employee['job_title'] = "HR Manager"
-  employee['department'] = "Human Resources"
-  employee['access_level'] = 2
-  employee["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
+  user['first_name'] = first_name 
+  user['last_name'] = last_name
+  user['email'] = email
+  user['company_id'] = 1
+  user['job_title'] = "HR Manager"
+  user['department'] = "Human Resources"
+  user['access_level'] = 2
+  user["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
 
-  Employee.create(employee)
+  User.create(user)
 end
 
 ActiveRecord::Base.transaction do
 	departments.each do |department|
   	first_name = Faker::Name.first_name 
     last_name = Faker::Name.unique.last_name
-    employee['first_name'] = first_name 
-    employee['last_name'] = last_name
-    employee['email'] = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
-    employee['company_id'] = 1
-    employee['job_title'] = "#{department} Manager"
-    employee['department'] = department
-    employee['access_level'] = 1
-    employee["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
+    user['first_name'] = first_name 
+    user['last_name'] = last_name
+    user['email'] = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
+    user['company_id'] = 1
+    user['job_title'] = "#{department} Manager"
+    user['department'] = department
+    user['access_level'] = 1
+    user["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
 
-    Employee.create(employee)
+    User.create(user)
   end
 end
 
@@ -95,16 +95,16 @@ ActiveRecord::Base.transaction do
     last_name = Faker::Name.unique.last_name
     department = departments.sample
     role = ["Executive", "Assistant"].sample
-    employee['first_name'] = first_name 
-    employee['last_name'] = last_name
-    employee['email'] = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
-    employee['company_id'] = 1
-    employee['job_title'] = "#{department} #{role}"
-    employee['department'] = department
-    employee['access_level'] = 0
-    employee["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
+    user['first_name'] = first_name 
+    user['last_name'] = last_name
+    user['email'] = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
+    user['company_id'] = 1
+    user['job_title'] = "#{department} #{role}"
+    user['department'] = department
+    user['access_level'] = 0
+    user["skills"] = Skill.where(id: skill_ids.sample(rand(5)))
 
-    Employee.create(employee)
+    User.create(user)
   end
 end 
 
