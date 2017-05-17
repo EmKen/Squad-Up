@@ -1,0 +1,3 @@
+var index = $('tr:last-child td:first-child').html();
+index = parseInt("index") + 1;
+$('.list-of-skills').append("<tr><td>" + index + "</td><td>" + <%= j @skill.skill_name %> + "</td><td>" + <%= j @skill.category %> + "</td><tr>");
