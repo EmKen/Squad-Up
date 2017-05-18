@@ -1,0 +1,57 @@
+<div class="add-skill" data-turbolinks='false'>
+	<h2>Add skills</h2>
+	<%#= f.select :skill_name, Skill.joins(:employee_skills).select('skills.*,employee_skills.*, count(skills.category) as category_count, count(employee_skills.skill_name as employee_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','skill.category','skills.'), {prompt:"Select skills to add"} %>
+	<%= form_with(model:current_user.skills.new) do |f| %>
+		<% arr = Skill.joins(:user_skills).select('skills.*,user_skills.*, count(skills.category) as category_count, count(skills.skill_name) as user_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','user_count','skill.category','category_count') %>
+		<select name='skill[skill_name]' id='skill_skill_name' class="selectpicker" >
+			<option value="">Select a skill to add:</option>
+			<% arr_within_arr.each_with_index do |arr,i| %>
+				<% if i == 0 %>
+					<optgroup label='<%=arr[2]%> - count: <%=arr[3]%> employee(s)' >
+						<option value='<%=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%=arr[1]%> employee(s) have this skill!'><%=arr[0]%></option>
+				<% elsif i == arr_within_arr.length - 1 && arr[2] == arr_within_arr[i-1][2] %>
+						<option value='<%=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%=arr[1]%> employee(s) have this skill!'><%=arr[0]%></option>
+					</optgroup>
+				<% elsif i == arr_within_arr.length - 1 && arr[2] != arr_within_arr[i-1][2] %>
+					<optgroup label='<%=arr[2]%> - count: <%=arr[3]%> employee(s)' >
+						<option value='<%=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%=arr[1]%> employee(s) have this skill!'><%=arr[0]%></option>
+					</optgroup>
+				<% elsif arr[2] != arr_within_arr[i-1][2] %>
+					</optgroup>
+					<optgroup label='<%=arr[2]%> - count: <%=arr[3]%> employee(s)' >
+						<option value='<%=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%=arr[1]%> employee(s) have this skill!'><%=arr[0]%></option>
+				<% else %>
+						<option value='<%=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%=arr[1]%> employee(s) have this skill!'><%=arr[0]%></option>
+				<% end %>
+			<% end %>
+		</select>
+		<%= f.submit %>
+	<% end %>
+</div>
+<div class="list-of-skills">
+	<p>Your list of skills:</p><br>
+	<% if @skills.count == 0 %>
+		<p>You have no skills yet.</p>
+	<% else %>
+		<table class="table table-hover">
+			<tr>
+				<th>#</th>
+				<th>Skill Name</th>
+				<th>Category</th>
+			</tr>
+			<tr>
+				<% @skills.each_with_index do |skill,i| %>
+					<td>
+						<%= i+1 %>
+					</td>
+					<td>
+						<%= skill.skill_name %>
+					</td>
+					<td>
+						<%= skill.category %>
+					</td>
+				<% end %>
+			</tr>
+		</table>
+	<% end %>
+</div>

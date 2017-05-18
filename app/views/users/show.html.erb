@@ -1,7 +1,10 @@
 
 
-<div class="parallax"></div>
+
 <div class="container">
+
+
+
 
 <br>
 <br>
@@ -14,9 +17,10 @@
 <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
 <h3 class="middle1"> <%= @user.job_title %> </h3>
 <h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
+<button type="submit" class="btn btn-primary btn-lg center-block">Edit your own skillset</button>
 </div>
 <div class="col-sm-6"{
-background-color: #e3e3e3;
+    background-color: #2C96A3;
 }>
 
   <h1 class="middle1"> What's your project? </h1>
@@ -47,6 +51,7 @@ background-color: #e3e3e3;
 
 <br>
 <br>
+
 <% if @user.staff? %>
 
 <table>
@@ -92,6 +97,7 @@ background-color: #e3e3e3;
 </table>
 
 <% end %>
+
 
 
 <br>

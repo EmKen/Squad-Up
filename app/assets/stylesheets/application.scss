@@ -3,3 +3,58 @@
 @import 'sessions';
 @import 'pages';
 @import 'users';
+@import 'skills';
+
+/* Bootstrap css */
+// @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
+
+/* Propeller typography */
+@import "http://propeller.in/components/typography/css/typography.css";
+//
+/* Propeller buttons */
+@import "http://propeller.in/components/button/css/button.css";
+//
+// /* Propeller icons */
+// @import "http://fonts.googleapis.com/icon?family=Material+Icons";
+// @import "http://propeller.in/components/icons/css/google-icons.css";
+//
+// /* Propeller card css */
+// @import "http://propeller.in/components/card/css/card.css";
+
+.navbar {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+}
+
+.navbar {
+  color: #000;
+  margin-top: 10px;
+  margin-bottom: auto;
+}
+
+.navbar1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  background: transparent;
+  border-color: transparent;
+}
+
+.parallax_nav {
+    /* The image used */
+    background-image: url("homeimage.png");
+
+    /* Set a specific height */
+    min-height: 200px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.each-contact {
+  width: 200px;
+}
