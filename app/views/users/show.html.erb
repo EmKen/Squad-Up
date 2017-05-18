@@ -12,6 +12,7 @@
 <div class=" col-sm-6">
 <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
 <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
+<h3 class="middle1"> <%= @user.job_title %> </h3>
 <h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
 </div>
 <div class="col-sm-6"{
@@ -39,13 +40,60 @@ background-color: #e3e3e3;
     <% end %>  
     <br>
     <div>
-      <%= form.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+      <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
     </div>
   </div>
 <% end %>
 
 <br>
 <br>
+<% if @user.staff? %>
+
+<table>
+  <tr>
+    <th> Approved Projects </th>
+  </tr>
+  <% @user.managed_projects.where(status: "approved").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+      <% if project.users.empty? %>
+        <td> <%= link_to "Build Squad", project_path(project) %> </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</br>
+<table>
+  <tr>
+    <th> Pending Approval </th>
+  </tr>
+  <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<% else %>
+
+<table>
+  <tr>
+    <th> Pending Your Approval </th>
+  </tr>
+  <% Project.where(status: "awaiting_approval").each do |project| %>
+    <% if project.project_owner.department == @user.department %>
+      <tr>
+        <td> <%= link_to project.title, project_path(project) %> </td>
+        <td> <%= link_to "Approve", project_approve_path(project) %> </td>
+        <td> <%= link_to "Refuse", project_refuse_path(project) %> </td>
+      </tr>
+    <% end %>  
+  <% end %>
+</table>
+
+<% end %>
+
+
 <br>
 <br>
 <br>
