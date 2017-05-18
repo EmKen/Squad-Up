@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string  :remember_token, limit: 128, null: false
       t.string  :private_token
       t.string  :profile_picture
+      t.boolean :notification
     end
 
     add_index :users, :email
