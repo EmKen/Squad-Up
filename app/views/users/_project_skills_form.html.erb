@@ -1,0 +1,6 @@
+<% Skill.distinct.pluck(:category).each do |category| %> 
+  <div>
+    <%= project_skills_form.label "#{category}" %>
+    <%= project_skills_form.collection_select(:skills, Skill.where(category: category), :id, :skill_name, {include_hidden: false}, {multiple: true, class: "form-control"}) %>
+  </div>
+<% end %>

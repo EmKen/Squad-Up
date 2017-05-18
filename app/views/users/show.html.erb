@@ -36,12 +36,7 @@
       <%= form.text_area :description, class: "form-control", rows: "3"%>
     </div>
       <h1 class="middle1"> Choose skills needed for project</h1>
-    <% Skill.distinct.pluck(:category).each do |category| %> 
-      <div>
-        <%= form.label "#{category}" %>
-        <%= form.collection_select(:skills, Skill.where(category: category), :id, :skill_name, {include_hidden: false}, {multiple: true, class: "form-control"}) %>
-      </div>
-    <% end %>  
+      <%= render partial: '/users/project_skills_form', object: form %>
     <br>
     <div>
       <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
