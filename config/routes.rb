@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   get "projects/:id/approve" => "projects#approve", as: "project_approve"
   get "projects/:id/refuse" => "projects#refuse", as: "project_refuse"
+  get "projects/:id/build_squad" => "projects#build_squad", as: "project_build_squad"
+  get "projects/:id/team_members" => "projects#team_members", as: "project_team_members"
+
 
   resources :skills, only: [:index, :create, :show]
 

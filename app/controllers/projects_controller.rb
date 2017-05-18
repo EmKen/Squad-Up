@@ -26,6 +26,15 @@ class ProjectsController < ApplicationController
 		redirect_to "/"
 	end
 
+	def build_squad
+		@project = Project.find(params[:id])
+	end
+
+	def team_members
+		@project = Project.find(params[:id])
+		redirect_to @project
+	end
+
 	private
 
   def project_params
