@@ -11,7 +11,7 @@
 <div class="row">
 <div class=" col-sm-6">
 <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
-<h1 class="middle1"> Joseph Wong </h1>
+<h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
 <h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
 </div>
 <div class="col-sm-6"{
@@ -19,61 +19,30 @@ background-color: #e3e3e3;
 }>
 
   <h1 class="middle1"> What's your project? </h1>
-  <form>
-<div class="form-group">
-  <label for="exampleInputEmail1">Project Name</label>
-  <input type="email" class="form-control" id="exampleInputEmail1"placeholder="Email">
-</div>
-<div>
-  <label for="exampleInputEmail1">Project Description</label>
-    <textarea class="form-control" rows="3"></textarea>
-</div>
-<br>
-<div>
-<button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-</div>
-</form>
-<br>
 
-  <h1 class="middle1"> Choose skills needed for project</h1>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-
-</div>
-</div>
+<%= form_for @project do |form| %>
+  <div class="form-group">
+    <div>
+      <%= form.label :title, "Project Name" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :description, "Project Description" %>
+      <%= form.text_area :description, class: "form-control", rows: "3"%>
+    </div>
+      <h1 class="middle1"> Choose skills needed for project</h1>
+    <% Skill.distinct.pluck(:category).each do |category| %> 
+      <div>
+        <%= form.label "#{category}" %>
+        <%= form.collection_select(:skills, Skill.where(category: category), :id, :skill_name, {include_hidden: false}, {multiple: true, class: "form-control"}) %>
+      </div>
+    <% end %>  
+    <br>
+    <div>
+      <%= form.submit "Submit", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  </div>
+<% end %>
 
 <br>
 <br>
