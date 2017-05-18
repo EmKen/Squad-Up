@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :sessions, only: [:create]
+      get '/current_user' => "users#give_current_user"
+      resources :users, only: [:show, :index] #do 
+      #   resources :skill
+      # end
+
+      resource :users, only: [:update] do
+        resources :skills, only: [:create]
+        post '/add_skill' => "skills#new"
+      end
+
+      
+
+      
+    end
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   root "sessions#new"
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
