@@ -1,7 +1,10 @@
 
 
-<div class="parallax"></div>
+
 <div class="container">
+
+
+
 
 <br>
 <br>
@@ -11,72 +14,87 @@
 <div class="row">
 <div class=" col-sm-6">
 <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
-<h1 class="middle1"> Joseph Wong </h1>
+<h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
+<h3 class="middle1"> <%= @user.job_title %> </h3>
 <h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
+<button type="submit" class="btn btn-primary btn-lg center-block">Edit your own skillset</button>
 </div>
 <div class="col-sm-6"{
-background-color: #e3e3e3;
+    background-color: #2C96A3;
 }>
 
   <h1 class="middle1"> What's your project? </h1>
-  <form>
-<div class="form-group">
-  <label for="exampleInputEmail1">Project Name</label>
-  <input type="email" class="form-control" id="exampleInputEmail1"placeholder="Email">
-</div>
-<div>
-  <label for="exampleInputEmail1">Project Description</label>
-    <textarea class="form-control" rows="3"></textarea>
-</div>
-<br>
-<div>
-<button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-</div>
-</form>
-<br>
 
-  <h1 class="middle1"> Choose skills needed for project</h1>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-<br>
-<form>
-  <select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-
-</div>
-</div>
+<%= form_for @project do |form| %>
+  <div class="form-group">
+    <div>
+      <%= form.label :title, "Project Name" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.label :description, "Project Description" %>
+      <%= form.text_area :description, class: "form-control", rows: "3"%>
+    </div>
+      <h1 class="middle1"> Choose skills needed for project</h1>
+      <%= render partial: '/users/project_skills_form', object: form %>
+    <br>
+    <div>
+      <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  </div>
+<% end %>
 
 <br>
 <br>
+
+<% if @user.staff? %>
+
+<table>
+  <tr>
+    <th> Approved Projects </th>
+  </tr>
+  <% @user.managed_projects.where(status: "approved").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+      <% if project.users.empty? %>
+        <td> <%= link_to "Build Squad", project_build_squad_path(project) %> </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+</br>
+<table>
+  <tr>
+    <th> Pending Approval </th>
+  </tr>
+  <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<% else %>
+
+<table>
+  <tr>
+    <th> Pending Your Approval </th>
+  </tr>
+  <% Project.where(status: "awaiting_approval").each do |project| %>
+    <% if project.project_owner.department == @user.department %>
+      <tr>
+        <td> <%= link_to project.title, project_path(project) %> </td>
+        <td> <%= link_to "Approve", project_approve_path(project) %> </td>
+        <td> <%= link_to "Refuse", project_refuse_path(project) %> </td>
+      </tr>
+    <% end %>  
+  <% end %>
+</table>
+
+<% end %>
+
+
+
 <br>
 <br>
 <br>

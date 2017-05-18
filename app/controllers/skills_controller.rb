@@ -1,12 +1,16 @@
 class SkillsController < ApplicationController
-	def index 
+	def show
 		@skills = current_user.skills
+	end
+
+	def index
+		@skills = Skill.all
 	end
 
 	def create
 		@skill = current_user.skills.new(skill_params)
 		respond_to do |format|
-			format.js 
+			format.js
 		end
 	end
 

@@ -1,0 +1,17 @@
+<h1> Here's your Project </h1>
+
+<h2> <%= @project.title %> </h2>
+<p> <%= @project.description %> </p>
+
+<table>
+  <tr>
+    <th> Skills Required </th>
+  </tr>
+  <% @project.skills.each do |skill| %>
+    <tr>
+      <td> <%= skill.category %> </td>
+      <td> <%= skill.skill_name %> </td>
+    </tr>
+  <% end %>
+</table>
+
