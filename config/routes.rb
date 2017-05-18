@@ -3,10 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :sessions, only: [:create]
       get '/current_user' => "users#give_current_user"
-      resources :users, only: [:show, :index] #do 
-      #   resources :skill
-      # end
-
+      resources :users, only: [:show, :index]
       resource :users, only: [:update] do
         resources :skills, only: [:create]
         post '/add_skill' => "skills#new"
