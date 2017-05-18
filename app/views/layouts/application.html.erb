@@ -57,6 +57,11 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+    <% if signed_in? %>
+      <%= link_to "Profile", root_path %>
+      <%= link_to "Sign out", sign_out_path, method: :delete %>
+    <% end %>
+
 
     <div id="flash">
       <% flash.each do |key, value| %>
