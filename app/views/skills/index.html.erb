@@ -1,8 +1,9 @@
 <div class="add-skill" data-turbolinks='false'>
 	<h2>Add skills</h2>
 	<%#= f.select :skill_name, Skill.joins(:employee_skills).select('skills.*,employee_skills.*, count(skills.category) as category_count, count(employee_skills.skill_name as employee_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','skill.category','skills.'), {prompt:"Select skills to add"} %>
-	<%= form_with(model:current_user.skills.new) do |f| %>
-		<% arr = Skill.joins(:user_skills).select('skills.*,user_skills.*, count(skills.category) as category_count, count(skills.skill_name) as user_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','user_count','skill.category','category_count') %>
+	<%= form_for current_user.skills.new, remote:true do |f| %>
+		<%# arr = Skill.joins(:user_skills).select('skills.*,user_skills.*, count(skills.category) as category_count, count(skills.skill_name) as user_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','user_count','skill.category','category_count') %>
+	<% arr_within_arr = Skill.all %>
 		<select name='skill[skill_name]' id='skill_skill_name' class="selectpicker" >
 			<option value="">Select a skill to add:</option>
 			<% arr_within_arr.each_with_index do |arr,i| %>
