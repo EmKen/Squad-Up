@@ -21,14 +21,12 @@
       <td> <%= @project.project_owner.first_name %> <%= @project.project_owner.last_name %></td>
     </tr>
 </table>
-<% byebug %>
 <% if @project.users %>
 	<table>
 	  <tr>
 	    <th> Team Members </th>
 	  </tr>
 	  <% @project.users.each do |user| %>
-	  <% byebug %>
 	    <tr>
 	      <td> <%= user.first_name %> <%= user.last_name %></td>
 	    </tr>
