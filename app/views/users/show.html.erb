@@ -90,6 +90,17 @@
     <% end %>  
   <% end %>
 </table>
+</br>
+<table>
+  <tr>
+    <th> Projects You've Approved </th>
+  </tr>
+  <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+    </tr>
+  <% end %>
+</table>
 
 <% end %>
 
