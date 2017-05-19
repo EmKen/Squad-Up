@@ -1,14 +1,18 @@
 class ProjectsController < ApplicationController
+	before_action :require_login
 	def create
 		@project = current_user.managed_projects.new(project_params)
 		@project.skills = Skill.where(id: params[:project][:skills])
 		if current_user.manager?
 			@project.approved!
-		end
-		if @project.save
-			redirect_to "/"
+			@project.approved_or_refused_by = current_user
+			if @project.save
+				redirect_to project_build_squad_path(@project)
+			end
 		else
-			byebug
+			if @project.save
+				redirect_to "/"
+			end
 		end
 	end
 
