@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+	before_action :require_login
 	def create
 		@project = current_user.managed_projects.new(project_params)
 		@project.skills = Skill.where(id: params[:project][:skills])

@@ -1,4 +1,5 @@
 class SkillsController < ApplicationController
+	before_action :require_login
 	def show
 		@skills = current_user.skills
 	end
