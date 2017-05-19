@@ -81,7 +81,6 @@
     <th> Pending Your Approval </th>
   </tr>
   <% Project.where(status: "awaiting_approval").each do |project| %>
-  <% byebug %>
     <% if project.project_owner.department == @user.department %>
       <tr>
         <td> <%= link_to project.title, project_path(project) %> </td>
