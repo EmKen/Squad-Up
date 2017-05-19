@@ -1,5 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "propeller.min";
+@import "propeller_overwrite";
 @import 'sessions';
 @import 'pages';
 @import 'users';
@@ -34,19 +36,21 @@
 }
 
 .navbar1 {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: transparent;
   background: transparent;
   border-color: transparent;
 }
+
+body {
+  font-family: 'OpenSans';
+ }
 
 .parallax_nav {
     /* The image used */
     background-image: url("homeimage.png");
 
     /* Set a specific height */
-    min-height: 200px;
+    min-height: 250px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;

@@ -2,23 +2,19 @@
 
 
 <div class="container">
-
-
-
-
 <br>
 <br>
 <br>
 <br>
 
 <div class="row">
-<div class=" col-sm-6">
-<%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
-<h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
-<h3 class="middle1"> <%= @user.job_title %> </h3>
-<h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
-<button type="submit" class="btn btn-primary btn-lg center-block">Edit your own skillset</button>
-</div>
+  <div class=" col-sm-6">
+    <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
+      <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
+      <h3 class="middle1"> <%= @user.job_title %> </h3><br>
+        <button type="submit" class="btn btn-primary center-block btn-lg ">Edit your own skillset
+        </button>
+  </div>
 <div class="col-sm-6"{
     background-color: #2C96A3;
 }>
@@ -36,61 +32,86 @@
       <%= form.text_area :description, class: "form-control", rows: "3"%>
     </div>
       <h1 class="middle1"> Choose skills needed for project</h1>
+
       <%= render partial: '/users/project_skills_form', object: form %>
+
     <br>
     <div>
       <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
     </div>
   </div>
 <% end %>
+</div>
 
 <br>
 <br>
+
+<div class="row">
+  <div class=" col-sm-6 ">
+  </div>
+
+<div class=" col-sm-6 user_blue">
+
 
 <% if @user.staff? %>
 
 <table>
-  <tr>
-    <th> Approved Projects </th>
-  </tr>
+    <div>
+      <h1> Approved Projects </h1>
+    </div>
+    </div>
   <% @user.managed_projects.where(status: "approved").each do |project| %>
-    <tr>
-      <td> <%= link_to project.title, project_path(project) %> </td>
+    <div class="pmd-card pmd-card-default pmd-z-depth">
+        <div class="pmd-card-body">
+            <h2>
+              <%= link_to project.title, project_path(project) %>
+            </h2>
       <% if project.users.empty? %>
-        <td> <%= link_to "Build Squad", project_build_squad_path(project) %> </td>
+
+        <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
+
       <% end %>
-    </tr>
   <% end %>
+    </div>
 </table>
 </br>
-<table>
-  <tr>
-    <th> Pending Approval </th>
-  </tr>
+
+  <div>
+    <h2> Pending Approval </h2>
+  </div>
   <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
-    <tr>
-      <td> <%= link_to project.title, project_path(project) %> </td>
-    </tr>
+    <div class="pmd-card pmd-card-default pmd-z-depth">
+      <h2> <%= link_to project.title, project_path(project) %> </h2>
+    </div>
   <% end %>
-</table>
 
 <% else %>
 
 <table>
-  <tr>
-    <th> Pending Your Approval </th>
-  </tr>
-  <% Project.where(status: "awaiting_approval").each do |project| %>
-    <% if project.project_owner.department == @user.department %>
-      <tr>
-        <td> <%= link_to project.title, project_path(project) %> </td>
-        <td> <%= link_to "Approve", project_approve_path(project) %> </td>
-        <td> <%= link_to "Refuse", project_refuse_path(project) %> </td>
-      </tr>
-    <% end %>  
-  <% end %>
-</table>
-</br>
+
+  <div>
+    <h1> Projects Pending Your Approval </h1>
+  </div>
+  </div>
+    <% Project.where(status: "awaiting_approval").each do |project| %>
+      <% if project.project_owner.department == @user.department %>
+          <div class="pmd-card pmd-card-default pmd-z-depth">
+              <div class="pmd-card-body">
+                <h2>
+                    <%= link_to project.title, project_path(project) %>
+                        <div><br>
+                    <!-- <div style="display: inline; padding-right: 60px; float: 10px;"  > -->
+                          <%= link_to "Approve", project_approve_path(project), class: "btn btn-primary"%>
+                          <%= link_to "Refuse", project_refuse_path(project), class: "btn btn-primary" %>
+                        </div>
+                    </div>
+                </h2>
+              </div>
+           </div>
+      <% end %>
+    <% end %>
+  </table>
+
 <table>
   <tr>
     <th> Projects You've Approved </th>
@@ -106,6 +127,12 @@
 
 
 
+  <% end %>
+
+  </div>
+</div>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -2,6 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.herotext {
+ font-size: 80px;
+ font-weight: 900;
+ color: white;
+}
+.subtext {
+ font-size: 35px;
+ font-weight: 900;
+ color: white;
+}
+
+.skill_element{
+    padding-left:  -10px;
+    padding-right:  10px;
+  }
+
+.skills_card {
+padding-left: 40px;
+padding-top: 10px;
+float: 10px;
+position: relative;
+}
+
+.skills_button {
+padding-left: 20px;
+position: absolute;
+left: 40;
+bottom: 0;
+margin-left: -10px !important;
+}
 
 .parallax_index {
     /* The image used */
@@ -15,6 +45,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.card_img {
+    width: 100%;
 }
 
 .img_index {
@@ -31,6 +64,11 @@
 .index_biege {
 background-color: #EB8023;
 height: 300px;
+}
+
+.index_darkblue {
+background-color: #2C3E50;
+padding-top: 15px;
 }
 
 .index_blue {
