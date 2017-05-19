@@ -20,6 +20,10 @@ class User < ApplicationRecord
   enum access_level: { staff: 0, manager: 1, admin: 2 }
   before_save :generate_private_token
 
+  mount_uploader :avatar, AvatarUploader
+  
+
+
   private
   def generate_private_token
   	if private_token.blank?

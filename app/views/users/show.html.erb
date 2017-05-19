@@ -13,7 +13,9 @@
 
 <div class="row">
 <div class=" col-sm-6">
-<%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
+  <div class="thumbnail">
+    <%= image_tag @user.avatar.url(:thumb) if @user.avatar? %>
+  </div>
 <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
 <h3 class="middle1"> <%= @user.job_title %> </h3>
 <h4 class="middle1"> This is joseph's bio if we want to have a short bio here. </h4>
@@ -76,6 +78,8 @@
 
 <% else %>
 
+
+
 <table>
   <tr>
     <th> Pending Your Approval </th>
@@ -87,12 +91,17 @@
         <td> <%= link_to "Approve", project_approve_path(project) %> </td>
         <td> <%= link_to "Refuse", project_refuse_path(project) %> </td>
       </tr>
-    <% end %>  
+    <% end %>
   <% end %>
 </table>
 
 <% end %>
-
+<div>
+<%= form_for(@user, html: { multipart: true } ) do |f| %>
+<%= f.file_field :avatar %>
+<%= f.submit "upload photo" %>
+</div>
+<% end %>
 
 
 <br>

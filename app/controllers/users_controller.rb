@@ -4,4 +4,9 @@ class UsersController < Clearance::UsersController
 		@user = User.find(params[:id])
 		@project = Project.new
 	end
+
+	def update
+		@user = User.find(params[:id])
+		@user.update(avatar:params[:user][:avatar])
+	end
 end
