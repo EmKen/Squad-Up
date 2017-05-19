@@ -10,11 +10,11 @@ class User < ApplicationRecord
   has_many		:project_team_members
   has_many		:projects, through: :project_team_members
 
-  has_many    :mentors, through: :menteeing, source: :mentee
-  has_many    :menteeing, foreign_key:'mentee_id', class_name:"Mentorship"
+  has_many    :mentees, through: :menteeing, source: :mentee
+  has_many    :menteeing, foreign_key:'mentor_id', class_name:"Mentorship"
 
-  has_many    :mentees, through: :mentoring, source: :mentor
-  has_many    :mentoring, foreign_key:'mentor_id', class_name:"Mentorship"
+  has_many    :mentors, through: :mentoring, source: :mentor
+  has_many    :mentoring, foreign_key:'mentee_id', class_name:"Mentorship"
 
   enum access_level: { staff: 0, manager: 1, admin: 2 }
   before_save :generate_private_token

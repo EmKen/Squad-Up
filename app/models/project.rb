@@ -4,6 +4,6 @@ class Project < ApplicationRecord
 	has_many		:skills, through: :project_skills
 	has_many		:users, through: :project_team_members
 	has_many		:project_team_members
-	has_one 		:project_chat
+	has_many 		:project_chats
 	enum status: { awaiting_approval: 0, approved: 1, refused: 2, complete: 3 }
 end

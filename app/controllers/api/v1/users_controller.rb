@@ -1,24 +1,37 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
 	def show
-		user = User.find(params[:id])
+		user = User.find(params["id"])
 		give_user_info(user)
 	end
 
 	def index
 		company = current_user.company
 		users = User.where("company_id = #{company.id}")
-		render json:users
+		users_array = users.map { |user| user.attributes }
+		users.each_with_index do |user,i|
+			arr = user.skills
+			arr = arr.map do |skill|
+				skill.attributes
+			end
+			users_array[i]["skills_array"] = arr
+		end
+		render json:users_array
 	end	
 
 	def update
 		current_params = params
 		current_params.delete("private_token")
 		current_params.delete("sessions")
-		current_user.update(current_params)
+		user = current_user
+		if user.update(current_params)
+			render status: 201, json:user
+		else 
+			render status: 422, json:user.errors.messages 
+		end
 	end
 
 	def give_user_info(user_or_id)
-		if user_or_id.integer?
+		if user_or_id.class == Integer
 			user = User.find(user_id)
 		else 
 			user = user_or_id

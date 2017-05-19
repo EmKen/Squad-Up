@@ -5,12 +5,15 @@ Rails.application.routes.draw do
       get '/current_user' => "users#give_current_user"
       resources :users, only: [:show, :index]
       resource :users, only: [:update] do
-        resources :skills, only: [:create]
+        resources :skills, only: [:create, :index]
         post '/add_skill' => "skills#new"
       end
 
-      
-
+      resources :project_chats, only: [:create, :index]
+      post '/mentorships/create_mentor' => 'mentorships#create_mentor'
+      post '/mentorships/accept_mentee' => 'mentorships#accept_mentee'
+      get '/mentorships/mentor' => 'mentorships#mentor'
+      get '/mentorships/mentee' => 'mentorships#mentee'
       
     end
   end

@@ -163,7 +163,7 @@ end
 
 ActiveRecord::Base.transaction do
 
-  Mentorship.create(mentor_id:1,mentee_id:23,request:true,message:"See you soon at 23 :)")
-  Mentorship.create(mentor_id:1,mentee_id:22,request:true,message:"See you at 22:)")
+  Mentorship.create(mentor_id:1,mentee_id:23,request_approval:true,mentor_message:"See you soon at 23 :)")
+  Mentorship.create(mentor_id:1,mentee_id:22,request_approval:true,mentor_message:"See you at 22:)")
 
 end
