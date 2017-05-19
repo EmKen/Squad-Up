@@ -161,3 +161,10 @@ ActiveRecord::Base.transaction do
   ProjectTeamMember.create(project_id: 7,user_id: 7,project_skill_id: 7)
 
 end
+
+ActiveRecord::Base.transaction do
+
+  Mentorship.create(mentor_id:1,mentee_id:23,request:true,message:"See you soon at 23 :)")
+  Mentorship.create(mentor_id:1,mentee_id:22,request:true,message:"See you at 22:)")
+
+end
