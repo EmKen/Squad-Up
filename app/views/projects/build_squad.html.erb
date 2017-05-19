@@ -7,10 +7,10 @@
 		<h3> <%= skill.skill_name %> </h3>
 		<% skill.users.each do |user| %>
 			<%= form.label "#{user.first_name} #{user.last_name}" %>
-			<%= form.check_box :users, { multiple: true, label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
+			<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
 		<% end %>
 	<% end %>
 	<div class="submit-field">
-    <%= form.submit "Send Requests" %>
+    <%= form.submit "Select Team!" %>
   </div>
 <% end %>
