@@ -7,14 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
+Faker::UniqueGenerator.clear
 
 
 user = {}
 user['password'] = 'password'
 departments = ["Sales", "Marketing", "Finance"]
 first_name = Faker::Name.first_name
-last_name = Faker::Name.last_name
+last_name = Faker::Name.unique.last_name
 email = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
 
 ActiveRecord::Base.transaction do
@@ -36,7 +36,7 @@ end
 ActiveRecord::Base.transaction do
 	departments.each do |department|
   	first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
+    last_name = Faker::Name.unique.last_name
     user['first_name'] = first_name
     user['last_name'] = last_name
     user['email'] = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
@@ -52,7 +52,7 @@ end
 ActiveRecord::Base.transaction do
   20.times do
   	first_name = Faker::Name.first_name
-    last_name = Faker::Name.last_name
+    last_name = Faker::Name.unique.last_name
     department = departments.sample
     role = ["Executive", "Assistant"].sample
     user['first_name'] = first_name

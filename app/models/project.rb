@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
 	belongs_to	:project_owner, class_name: "User"
-	belongs_to	:approved_or_refused_by, class_name: "User"
+	belongs_to	:approved_or_refused_by, class_name: "User", optional: true
 	has_many		:project_skills
 	has_many		:skills, through: :project_skills
 	has_many		:users, through: :project_team_members

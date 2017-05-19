@@ -7,6 +7,8 @@ class ProjectsController < ApplicationController
 		end
 		if @project.save
 			redirect_to "/"
+		else
+			byebug
 		end
 	end
 
