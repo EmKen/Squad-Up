@@ -1,41 +1,40 @@
 
 
 
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 index_biege middle">
 			<br>
-			<br>
-			<h1> LEVEL UP! </h1>
-			<h2> Looking for relevant skills? Get mentorship here. </h2>
+			<div class="herotext"> LEVEL UP! </div>
+			<div class="subtext"> Looking for relevant skills? </div>
+			<div class="subtext"> Get mentorship here. </div>
 
 		</div>
 		<div class="col-md-6 index_blue middle">
 			<%= image_tag "index_skill.png", class:"my-img center-block"  %>
 		</div>
 	</div>
-<br>
-<br>
-<br>
-<div class="container">
-		<div style="display: flex; flex-wrap: wrap; flex-direction: column; height: 1000px; width: 100px;">
-			<% @skills.each do |skill| %>
-				<div class="cccol-sm-4">
-				<div class=" pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
-				<h2 class="pmd-card-title-text">
-				  <%=link_to "#{skill.skill_name}", skill_path(skill) %>
-				</h2>
-				  <span class="pmd-card-subtitle-text">
-				  	<% skill.users.each do |user| %>
-				  		<%=link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
-				  </span>
+</div>
+<div class="container-fluid index_darkblue">
+	<div class="row">
+		<% @skills.each do |skill| %>
+			<div class="col-sm-2">
+				<%= image_tag "skill#{[1,2,3].sample}.png", class: "card_img" %>
+				<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
+					<h2 class="pmd-card-title-text">
+		  		<%=link_to "#{skill.skill_name}", skill_path(skill) %>
+					</h2>
+			  	<span class="pmd-card-subtitle-text">
+			  		<% skill.users.each do |user| %>
+			  			<%=link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
+							<br>
 						<%end%>
-						<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
-						    <div class="pmd-card-actions">
-						        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Contact</button>
-						    </div>
-						</div>
-					</div>
+			  	</span>
+		    	<div class="pmd-card-actions">
+		        <button class="btn btn-primary btn-md pmd-ripple-effect btn-primary skills_button" type="button">Contact</button>
+		    	</div>
 				</div>
-			<%end%>
-    </div>
+			</div>
+		<%end%>
+	</div>
 </div>
