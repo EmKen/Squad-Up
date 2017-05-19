@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
 	def show
-		user = User.find(params["id"])
+		user = User.find(params["id"].to_i)
 		give_user_info(user)
 	end
 
@@ -68,6 +68,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 			# projects_array[i] is hash, so this is inserting values for key 'skills_array' into the hash.
 			projects_array[i]['skills_array'] = skills 
 		end
+		projects_array
 	end
 
 end
