@@ -1,11 +1,15 @@
-<h1> Here's your Project </h1>
+<h1> <%= @project.title %> </h1>
+<h4> <%= @project.description %> </h4>
 
-<h2> <%= @project.title %> </h2>
-<p> <%= @project.description %> </p>
+<h3> Status: <%= @project.status.titleize %> </h3>
 
 <table>
   <tr>
     <th> Skills Required </th>
+  </tr>
+    <tr>
+    <th> Category </th>
+    <th> Skill </th>
   </tr>
   <% @project.skills.each do |skill| %>
     <tr>
@@ -14,4 +18,25 @@
     </tr>
   <% end %>
 </table>
+</br>
+<table>
+  <tr>
+    <th> Project Manager </th>
+  </tr>
+    <tr>
+      <td> <%= @project.project_owner.first_name %> <%= @project.project_owner.last_name %></td>
+    </tr>
+</table>
+<% if @project.users.exists? %>
+	<table>
+	  <tr>
+	    <th> Team Members </th>
+	  </tr>
+	  <% @project.users.each do |user| %>
+	    <tr>
+	      <td> <%= user.first_name %> <%= user.last_name %></td>
+	    </tr>
+	  <% end %>
+	</table>
+<% end %>
 

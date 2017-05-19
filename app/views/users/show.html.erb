@@ -32,12 +32,9 @@
       <%= form.text_area :description, class: "form-control", rows: "3"%>
     </div>
       <h1 class="middle1"> Choose skills needed for project</h1>
-    <% Skill.distinct.pluck(:category).each do |category| %>
-      <div>
-        <%= form.label "#{category}" %>
-        <%= form.collection_select(:skills, Skill.where(category: category), :id, :skill_name, {include_hidden: false}, {multiple: true, class: "form-control"}) %>
-      </div>
-    <% end %>
+
+      <%= render partial: '/users/project_skills_form', object: form %>
+
     <br>
     <div>
       <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
@@ -70,7 +67,9 @@
               <%= link_to project.title, project_path(project) %>
             </h2>
       <% if project.users.empty? %>
+
         <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
+
       <% end %>
   <% end %>
     </div>
@@ -89,6 +88,7 @@
 <% else %>
 
 <table>
+
   <div>
     <h1> Projects Pending Your Approval </h1>
   </div>
@@ -111,6 +111,21 @@
       <% end %>
     <% end %>
   </table>
+
+<table>
+  <tr>
+    <th> Projects You've Approved </th>
+  </tr>
+  <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
+    <tr>
+      <td> <%= link_to project.title, project_path(project) %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<% end %>
+
+
 
   <% end %>
 

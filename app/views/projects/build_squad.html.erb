@@ -1,0 +1,16 @@
+<h1> <%= @project.title %> </h1>
+<h2> Get Your Dream Team </h2>
+
+
+<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
+	<% @project.skills.each do |skill| %>
+		<h3> <%= skill.skill_name %> </h3>
+		<% skill.users.each do |user| %>
+			<%= form.label "#{user.first_name} #{user.last_name}" %>
+			<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
+		<% end %>
+	<% end %>
+	<div class="submit-field">
+    <%= form.submit "Select Team!" %>
+  </div>
+<% end %>
