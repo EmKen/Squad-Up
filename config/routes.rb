@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get "projects/:id/build_squad" => "projects#build_squad", as: "project_build_squad"
   get "projects/:id/team_members" => "projects#team_members", as: "project_team_members"
   get "users/:id/skills" => "users#skills", as: "user_skills"
+  post "users/:id/add_skills" => "users#add_skills", as: "add_user_skills"
 
 
   resources :skills, only: [:index, :create, :show]
