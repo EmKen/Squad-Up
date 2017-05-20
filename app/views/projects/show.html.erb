@@ -1,42 +1,46 @@
-<h1> <%= @project.title %> </h1>
-<h4> <%= @project.description %> </h4>
 
-<h3> Status: <%= @project.status.titleize %> </h3>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-5 projects_darkblue">
+        <h1 class= "projects_title_desc">
+          Project Name
+        </h1>
+        <h1 class= "projects_title">
+          <%= @project.title %>
+        </h1>
+        <hr>
+        <h4 class="projects_header">
+            <%= @project.description %>
+        </h4>
+        <h3 class="projects_sub">
+          Status: <%= @project.status.titleize %>
+        </h3>
+    </div>
 
-<table>
-  <tr>
-    <th> Skills Required </th>
-  </tr>
-    <tr>
-    <th> Category </th>
-    <th> Skill </th>
-  </tr>
-  <% @project.skills.each do |skill| %>
-    <tr>
-      <td> <%= skill.category %> </td>
-      <td> <%= skill.skill_name %> </td>
-    </tr>
-  <% end %>
-</table>
-</br>
-<table>
-  <tr>
-    <th> Project Manager </th>
-  </tr>
-    <tr>
-      <td> <%= @project.project_owner.first_name %> <%= @project.project_owner.last_name %></td>
-    </tr>
-</table>
-<% if @project.users.exists? %>
-	<table>
-	  <tr>
-	    <th> Team Members </th>
-	  </tr>
-	  <% @project.users.each do |user| %>
-	    <tr>
-	      <td> <%= user.first_name %> <%= user.last_name %></td>
-	    </tr>
-	  <% end %>
-	</table>
-<% end %>
-
+    <div class="col-md-7 projects_blue2">
+      <h1 class= "projects_title_desc_bk">
+        Project Manager
+      </h1>
+      
+      <h1 class="projects_title_bk" >
+        <%= @project.project_owner.first_name %>
+        <%= @project.project_owner.last_name %>
+      </h1>
+        <hr>
+        <h2> Skills Required </h2>
+        <h2> Category </h2>
+        <h2> Skill </h2>
+          <% @project.skills.each do |skill| %>
+            <h1 class="projects_sub_bk" >
+              <%= skill.category %>
+              <%= skill.skill_name %>
+            </h1>
+          <% end %>
+          <% if @project.users.exists? %>
+             <h2> Team Members </h2>
+             <% @project.users.each do |user| %>
+               <%= user.first_name %> <%= user.last_name %>
+             <% end %>
+          <% end %>
+    </div>
+</div>
