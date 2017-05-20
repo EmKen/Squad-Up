@@ -1,11 +1,49 @@
-<%= form_for @user do |form| %>
-  <div>
-      <h1> Add a skill to your portfolio </h1>
-      <%= render partial: '/users/skills_form', object: form %>
-    <br>
+<% if @errors %>  
+  <% @errors.each do |attr,msg| %>
+      <li><%= msg %></li>
+  <% end %>
+<% end %>  
+
+
+
+<h1> Your skills </h1>
+<div>
+  <% @current_skills.pluck(:category).uniq.each do |category| %>
+    <h2> <%= category %> </h2>
+    <% @current_skills.where(category: category).each do |skill| %>
+      <%= skill.skill_name %>
+      </br>
+    <% end %>
+    </br>
+  <% end %>
+</div>
+
+
+
+<div>
+  <%= form_for @skill, url: add_user_skills_path do |form| %>
     <div>
-      <%= form.submit "Add skill" %>
+      <h1> Add a skill to your portfolio </h1>
+      <% Skill.distinct.pluck(:category).each do |category| %> 
+        <div>
+          <%= form.label "#{category}" %>
+          <%= form.collection_select(:skill_name, Skill.where(category: category).where.not(id: @current_skills.ids), :id, :skill_name, {include_hidden: false}, {name: "skill_ids[]", multiple: true, class: "form-control"}) %>
+        </div>
+      <% end %>
+      </br>
+      <div> <h3> Have a skill that isn't listed? </h3>
+        <div>
+          <%= form.label :category, "Category" %>
+          <%= form.select(:category, (Skill.distinct.pluck(:category)), {prompt: "Please choose a category"}, {class: "form-control"})%>
+        </div>
+         <div>
+          <%= form.label :skill, "Skill" %>
+          <%= form.text_field :skill_name, class: "form-control" %>
+        </div>
+      </div>
+      <div>
+        <%= form.submit "Add skill(s)", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>
