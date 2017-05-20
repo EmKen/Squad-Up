@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>SquadUp</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>SquadUp</title>
+  <%= csrf_meta_tags %>
 
   <!-- Open Sans login-->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    <!--Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-<%if !signed_in? %>
-  <body>
-      <!-- Bootstrap basic Navbar -->
-<% else %>
+<body>
+  <% if signed_in? %>
 
-<!-- Bootstrap basic Navbar -->
-<nav class="navbar1 navbar-inverse parallax_nav" >
-    <div class="container-fluid">
-<!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-      </button>
-<!-- Joseph put brand here -->
-      <%=image_tag("company_logo.png", size: "60x60",)%>
-    </div>
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<ul class="nav navbar-nav navbar-right">
-  <%= button_to "Sign Out", sign_out_path, method: :delete, class:"btn btn-primary btn-md btn-block" %>
-</ul>
-</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
+    <!-- Bootstrap basic Navbar -->
+    <nav class="navbar1 navbar-inverse parallax_nav" >
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+          <!-- Joseph put brand here -->
+          <%= image_tag("company_logo.png", size:'60x60') %>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+          <%= button_to "Sign Out", sign_out_path, method: :delete, class:"btn btn-primary btn-md btn-block"%>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     <div id="flash">
       <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
+        <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
-<% end %>
     </div>
+  <% end %>
 
-    <%= yield %>
-  </body>
+  <%= yield %>
+
+</body>
+
 </html>

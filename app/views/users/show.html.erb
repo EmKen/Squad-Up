@@ -6,7 +6,6 @@
 <br>
 <br>
 <br>
-
 <div class="row">
   <div class=" col-sm-6">
     <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
@@ -31,6 +30,7 @@
       <%= form.text_area :description, class: "form-control", rows: "3"%>
     </div>
       <h1 class="middle1"> Choose skills needed for project</h1>
+
 
       <%= render partial: '/users/skills_form', object: form %>
 
@@ -123,8 +123,6 @@
 </table>
 
 <% end %>
-
-
 
   </div>
 </div>
