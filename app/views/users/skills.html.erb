@@ -1,0 +1,11 @@
+<%= form_for @user do |form| %>
+  <div>
+      <h1> Add a skill to your portfolio </h1>
+      <%= render partial: '/users/skills_form', object: form %>
+    <br>
+    <div>
+      <%= form.submit "Add skill" %>
+    </div>
+  </div>
+<% end %>
+</div>

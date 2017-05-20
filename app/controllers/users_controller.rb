@@ -4,4 +4,8 @@ class UsersController < Clearance::UsersController
 		@user = User.find(params[:id])
 		@project = Project.new
 	end
+
+	def skills
+		@user = User.find(params[:id])
+	end
 end
