@@ -1,8 +1,13 @@
 class Api::V1::ProjectChatsController < Api::V1::ApplicationController
 	def create
-		ProjectChat.create(project_id:params["project_id"].to_i,user_id:current_user.id,message:params["message"])
-		chat = Project.find(params["project_id"].to_i).project_chats.last
-		render json:chat
+		chat = ProjectChat.new(project_id:params["project_id"].to_i,user_id:current_user.id,message:params["message"])
+		if chat.save
+      ActionCable.server.broadcast 'messages',
+        chat
+      head :ok
+		else
+			render json:chat.errors.messages
+		end
 	end
 
 	def index
