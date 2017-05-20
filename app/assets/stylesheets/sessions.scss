@@ -7,7 +7,7 @@
     background-image: url("homeimage.png");
 
     /* Set a specific height */
-    min-height: 700px;
+    min-height: 120px;
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -16,9 +16,9 @@
     background-size: cover;
 }
 .landing_center{
-float: none;
-margin: 0 auto;
-padding-left: 150px;
+  float: none;
+  margin: 0 auto;
+  padding-left: 150px;
 }
 
 .my-img {
@@ -28,3 +28,4 @@ padding-left: 150px;
 .middle {
   text-align: center;
 }
+

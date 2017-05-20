@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :sessions, only: [:create]
       get '/current_user' => "users#give_current_user"
-      resources :users, only: [:show, :index]
+      resources :users, only: [:index]
+      get '/user/:id' => "users#show"
       resource :users, only: [:update] do
         resources :skills, only: [:create, :index]
         post '/add_skill' => "skills#new"
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       get '/mentorships/mentor' => 'mentorships#mentor'
       get '/mentorships/mentee' => 'mentorships#mentee'
       
+      get '/projects/:project_id' => 'projects#show'
     end
   end
 
