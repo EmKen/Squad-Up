@@ -12,7 +12,7 @@
   <%= form.submit 'Sign In', class:"btn btn-default"%>
 
   <div class="form-group">
-    <%= link_to t(".forgot_password"), new_password_path %>
+    <%= button_to t(".forgot_password"), new_password_path, method: :get, class:"btn btn-default"  %>
   </div>
 <% end %>
 <!--

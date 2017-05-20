@@ -7,9 +7,6 @@
 @import 'users';
 @import 'skills';
 
-/* Bootstrap css */
-// @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css";
-
 /* Propeller typography */
 @import "http://propeller.in/components/typography/css/typography.css";
 //
@@ -31,8 +28,9 @@
 
 .navbar {
   color: #000;
-  margin-top: 10px;
+  padding-top: 10px;
   margin-bottom: auto;
+  position: fixed;
 }
 
 .navbar1 {
