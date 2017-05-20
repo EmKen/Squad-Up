@@ -1,16 +1,59 @@
-<h1> <%= @project.title %> </h1>
-<h2> Get Your Dream Team </h2>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 index_biege middle">
+		</div>
+		<div class="col-md-6 index_biege middle">
+			<br><br><br>
+			<div class="herotext_squad">Build Your Dream Team </div>
+						<hr>
+			<div class="subtext"> Project: <%= @project.title %> </div>
+
+		</div>
+		<div class="col-md-3 index_biege middle">
+		</div>
+	</div>
+</div>
 
 
-<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
-	<% @project.skills.each do |skill| %>
-		<h3> <%= skill.skill_name %> </h3>
-		<% skill.users.each do |user| %>
-			<%= form.label "#{user.first_name} #{user.last_name}" %>
-			<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
-		<% end %>
-	<% end %>
-	<div class="submit-field">
-    <%= form.submit "Select Team!" %>
-  </div>
+
+			<div class="container-fluid index_darkblue">
+				<h1> Select your team below</h1>
+				<br><br><br>
+					<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
+							<div class="row">
+										<% @project.skills.each do |skill| %>
+												<div class="col-sm-3">
+													<%= image_tag "Staff#{[1,2,3,4,5].sample}.png", class: "card_img" %>
+													<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
+													<h2 class="pmd-card-title-text"><%= skill.skill_name %> </h2>
+															<% skill.users.each do |user| %>
+																	<div>
+																		<%= form.label "#{user.first_name} #{user.last_name}" %>
+
+																		<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
+																</div>
+															<% end %>
+													<hr>
+												</div>
+											</div>
+										<% end %>
+							</div>
+
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-3 middle">
+					</div>
+					<div class="col-md-6 middle">
+						<br><br><br>
+<%= form.submit "Select Team!", class:"btn btn-primary btn-lg btn-block submit-field" %>
 <% end %>
+					</div>
+					<div class="col-md-3 middle">
+					</div>
+				</div>
+					<br>
+					<br>
+					<br>

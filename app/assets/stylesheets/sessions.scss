@@ -16,16 +16,42 @@
     background-size: cover;
 }
 .landing_center{
-  float: none;
-  margin: 0 auto;
-  padding-left: 150px;
+  padding-left: 50px;
+  padding-right: 100px;
+}
+
+.session_signin_hero{
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+}
+
+.session_signin_sub_hero{
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+}
+
+.session_text_hero{
+  font-size: 50px;
+  font-weight: 900;
+  color: black;
+}
+
+.session_form_size{
+  width: 100%
 }
 
 .my-img {
-  width: 300px;
+  width: 200px;
+  padding-right: 10px;
 }
 
 .middle {
   text-align: center;
 }
 
+.sessions_darkblue {
+background-color: #2C3E50;
+height: 400px;
+}

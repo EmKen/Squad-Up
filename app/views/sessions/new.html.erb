@@ -1,37 +1,32 @@
 <div class="parallax1">
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <%= image_tag("logo.png", size: "100") %>
       </div>
-    </div><!-- /.container-fluid -->
-  </nav>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col-md-4 middle">
     </div>
-    <div class="col-md-6 landing_center">
-      <div id="clearance" class="sign-in">
-        <div class="container center-block">
-          <h2 class="header"><% t(".title") %></h2>
-          <%= render partial: '/sessions/form' %>
+  </nav>
+  <br><br><br><br><br><br><br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6 landing_center sessions_darkblue">
+        <br>
+        <h1 class="session_signin_hero"> YOUR BEST TEAM </h1>
+        <h1 class="session_signin_sub_hero"> IS WAITING </h1>
+        <div id="clearance" class="sign-in">
+          <!-- <div class="container center-block"> -->
+            <h2 class="header"><% t(".title") %></h2>
+            <%= render partial: '/sessions/form' %>
+          <!-- </div> -->
         </div>
       </div>
     </div>
-    <div class="col-md-2 middle">
-    </div>
   </div>
+  <br><br><br><br><br><br><br><br>
 </div>
 
 <div class="container">
@@ -43,7 +38,7 @@
   <div class="row">
     <div class="col-md-2 middle"></div>
     <div class="col-md-8 middle">
-      <h1> WHAT CAN SQUAD UP DO FOR YOU? </h1>
+      <h1 class="session_text_hero" > WHAT CAN SQUAD UP DO FOR YOU? </h1>
       <h3> Squad Up is a HR Tool that matches people with specific talents in acompany, to project owners. That means you always have the best team aroundyou for the tasks that matter. </h3>
     </div>
     <div class="col-md-2 middle"></div>
