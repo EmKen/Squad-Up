@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  mount ActionCable.server => '/cable'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root "sessions#new"
