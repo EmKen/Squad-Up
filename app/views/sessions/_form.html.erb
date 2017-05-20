@@ -1,20 +1,21 @@
-<%= form_for :session, url: session_path, html: { class:"form-inline" } do |form| %>
-  <div  class="form-group" >
-    <%= form.label :email, class: 'sr-only' %>
-    <%= form.text_field :email, type: 'email', class:'form-control', placeholder: 'Email' %>
-  </div>
 
-  <div class="form-group">
-    <%= form.label :password, class: 'sr-only' %>
-    <%= form.password_field :password,  class:"form-control", placeholder: 'Password' %>
-  </div>
+<%= form_for :session, url: session_path do |form| %>
+    <div  class="form-group" >
+      <%= form.label :email, class: 'sr-only' %>
+      <%= form.text_field :email, type: 'email', class:'form-control', placeholder: 'Email' %>
+    </div>
+    <div>
+      <div class="form-group ">
+        <%= form.label :password, class: 'sr-only' %>
+        <%= form.password_field :password,  class:"form-control session_form_size", placeholder: 'Password' %>
+      </div>
+    </div>
+    <form class="form-inline">
+    <%= form.submit 'Sign In', class:"btn btn-primary btn-lg"%>
 
-  <%= form.submit 'Sign In', class:"btn btn-default"%>
+      <%= button_to t(".forgot_password"), new_password_path, method: :get, class:"btn btn-primary btn-lg"  %>
+  <% end %>
 
-  <div class="form-group">
-    <%= button_to t(".forgot_password"), new_password_path, method: :get, class:"btn btn-default"  %>
-  </div>
-<% end %>
 <!--
 <form class="form-inline">
   <div class="form-group">
