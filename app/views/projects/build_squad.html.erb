@@ -17,43 +17,48 @@
 
 
 
-			<div class="container-fluid index_darkblue">
-				<h1> Select your team below</h1>
-				<br><br><br>
-					<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
-							<div class="row">
-										<% @project.skills.each do |skill| %>
-												<div class="col-sm-3">
-													<%= image_tag "Staff#{[1,2,3,4,5].sample}.png", class: "card_img" %>
-													<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
-													<h2 class="pmd-card-title-text"><%= skill.skill_name %> </h2>
-															<% skill.users.each do |user| %>
-																	<div>
-																		<%= form.label "#{user.first_name} #{user.last_name}" %>
-
-																		<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
-																</div>
-															<% end %>
-													<hr>
-												</div>
-											</div>
-										<% end %>
+<div class="container-fluid index_darkblue">
+	<h1> Select your team below</h1>
+	<br><br><br>
+	<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
+		<div class="row">
+			<% @project.skills.each do |skill| %>
+				<div class="col-sm-3">
+					<%= image_tag "Staff#{[1,2,3,4,5].sample}.png", class: "card_img" %>
+					<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
+						<h2 class="pmd-card-title-text"><%= skill.skill_name %> </h2>
+						<% skill.users.each do |user| %>
+							<div>
+								<%= form.label "#{user.first_name} #{user.last_name}" %>
+								<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
 							</div>
-
-				</div>
-
-
-				<div class="row">
-					<div class="col-md-3 middle">
-					</div>
-					<div class="col-md-6 middle">
-						<br><br><br>
-<%= form.submit "Select Team!", class:"btn btn-primary btn-lg btn-block submit-field" %>
-<% end %>
-					</div>
-					<div class="col-md-3 middle">
+						<% end %>
+						<hr>
 					</div>
 				</div>
-					<br>
-					<br>
-					<br>
+			<% end %>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-3 middle">
+		</div>
+		<div class="col-md-6 middle">
+			<br><br><br>
+			<%= form.submit "Select Team!", class:"btn btn-primary btn-lg btn-block submit-field" %>
+		</div>
+	<% end %>
+	</div>
+	<div class="row">
+		<div class="col-md-3 middle">
+		</div>
+		<div class="col-md-6 middle">
+			<br>
+			<%= button_to "Tweak your skill needs", edit_project_skills_path(@project), method: :get, class:"btn btn-primary btn-lg btn-block submit-field" %>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<br>
