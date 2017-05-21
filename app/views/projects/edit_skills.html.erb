@@ -1,0 +1,14 @@
+<h1> Edit the skills required for your project </h1>
+
+<%= form_for @project, url: update_project_skills_path do |form| %>	
+	<% Skill.distinct.pluck(:category).each do |category| %> 
+	  <div>
+	    <%= form.label :category, category.upcase %>
+	    <%= form.collection_select(:skills, Skill.where(category: category), :id, :skill_name, {include_hidden: false, selected: @project.skills.where(category: category).map(&:id)}, {multiple: true, class: "form-control"}) %>
+	  </div>
+	<% end %>
+	</br>
+	<div>
+    <%= form.submit "Confirm changes", class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end %>
