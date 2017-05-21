@@ -29,7 +29,7 @@
                           <%= form.text_area :description, class: "form-control", rows: "3"%>
                         </div>
                         <h1 class="middle1"> Choose skills needed for project</h1>
-                        <%= render partial: '/users/project_skills_form', object: form %>
+                        <%= render partial: '/users/skills_form', object: form %>
                       <br>
                       <div>
                         <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
