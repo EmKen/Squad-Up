@@ -1,45 +1,44 @@
 
 <div class="container-fluid">
-<div class="row">
-    <div class="col-md-5 projects_darkblue">
-        <h1 class= "projects_title_desc">
-          Project Name
-        </h1>
-        <h1 class= "projects_title">
-          <%= @project.title %>
-        </h1>
-        <hr>
-        <h4 class="projects_header">
-            <%= @project.description %>
-        </h4>
-        <h3 class="projects_sub">
-          Status: <%= @project.status.titleize %>
-        </h3>
-    </div>
-
-    <div class="col-md-7 projects_blue2">
-      <h1 class= "projects_title_desc_bk">
-        Project Manager
-      </h1>
-      
-      <h1 class="projects_title_bk" >
-        <%= @project.project_owner.first_name %>
-        <%= @project.project_owner.last_name %>
-      </h1>
-        <hr>
-        <h2> Skills Required </h2>
-        <h2> Category </h2>
-        <h2> Skill </h2>
-          <% @project.skills.each do |skill| %>
-            <h1 class="projects_sub_bk" >
-              <%= skill.category %>
-              <%= skill.skill_name %>
+    <div class="row">
+        <div class="col-md-6 projects_darkblue">
+            <h1 class= "projects_title_desc">
+              Project Name
             </h1>
-          <% end %>
-          <% if @project.users.exists? %>
+            <h1 class= "projects_title">
+              <%= @project.title %>
+            </h1>
+            <hr>
+            <h4 class="projects_header">
+                <%= @project.description %>
+            </h4>
+            <h3 class="projects_sub">
+              Status: <%= @project.status.titleize %>
+            </h3>
+        </div>
+
+        <div class="col-md-6 projects_blue2">
+          <h1 class= "projects_title_desc_bk">
+            Project Manager
+          </h1>
+          <h1 class="projects_title_bk" >
+            <%= @project.project_owner.first_name %>
+            <%= @project.project_owner.last_name %>
+          </h1>
+              <hr>
+            <h2 class="projects_header_bk"> Skills Required </h2>
+              <% @project.skills.each do |skill| %>
+                <div class= "container-fluid">
+                  <div class="col-md-4 projects_sub_bk">
+                    <%= skill.skill_name %>
+                  </div>
+                </div>
+              <% end %>
+
+         <% if @project.users.exists? %>
             <table>
               <tr>
-                <th> Team Members </th>
+                <h1 class="projects_header_bk"> Team Members </h1>
               <tr> 
               <% @project.users.each do |user| %>
                 <tr>
@@ -49,4 +48,16 @@
              <% end %>
           <% end %>
     </div>
-</div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-md-4 middle projects_beige">
+    </div>
+    <div class="col-xs-6 col-md-4 middle projects_beige">
+      <br><br><br>
+      <%= button_to "Back to Profile", user_path(current_user), method: "get", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+    <div class="col-xs-6 col-md-4 middle projects_beige">
+
+    </div>
+  </div>

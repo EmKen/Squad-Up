@@ -9,11 +9,10 @@
           <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
             <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
             <h3 class="middle1"> <%= @user.job_title %> </h3><br>
+
               <%= button_to "Edit your own skillset", user_skills_path(@user), method: :get, class:"btn btn-primary center-block btn-lg"%>
         </div>
-          <div class="col-sm-6"{
-              background-color: #2C96A3;
-          }>
+          <div class="col-sm-6">
 
             <h1 class="middle1"> What's your project? </h1>
 
@@ -28,7 +27,8 @@
                           <%= form.text_area :description, class: "form-control", rows: "3"%>
                         </div>
                         <h1 class="middle1"> Choose skills needed for project</h1>
-                        <%= render partial: '/users/skills_form', object: form %>
+
+                        <%= render partial: 'users/skills_form', object: form %>
                       <br>
                       <div>
                         <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
@@ -37,57 +37,58 @@
               <% end %>
           </div>
       </div>
-
 </div>
 
 <br>
 <br>
-  <div class= "container-fluid user_blue">
-<div class="row">
-    <div class=" col-sm-6 ">
-    </div>
-  </div>
+
+
+<div class= "container-fluid user_darkblue">
+
 
 <% if @user.staff? %>
-<div class=" col-sm-6 user_blue">
-      <table>
-          <div>
-            <h1> Approved Projects </h1>
-          </div>
-        <% @user.managed_projects.where(status: "approved").each do |project| %>
-          <div class="pmd-card pmd-card-default pmd-z-depth">
-              <div class="pmd-card-body">
-                  <h2>
-                    <%= link_to project.title, project_path(project) %>
-                  </h2>
-            <% if project.users.empty? %>
-              <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
-            <% end %>
-        <% end %>
-          </div>
-      </table>
-      </br>
-        <div>
-          <h2> Pending Approval </h2>
-        </div>
-        <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
-          <div class="pmd-card pmd-card-default pmd-z-depth">
-            <h2> <%= link_to project.title, project_path(project) %> </h2>
-          </div>
-        <% end %>
-          </div>
-      </div>
-<% else %>
-      <div class= "container-fluid user_blue">
-        <div class= "container">
+    <div class= "container-fluid user_darkblue">
+          <div class= "container user_darkblue">
             <div class= "row">
-                <div class= "col-sm-6 user_blue">
+                  <div class=" col-md-6 user_darkblue">
+                        <div>
+                          <h1 class="user_title_desc"> Approved Projects </h1>
+                        </div>
+                            <% @user.managed_projects.where(status: "approved").each do |project| %>
+                              <div class="pmd-card pmd-card-default pmd-z-depth">
+                                  <div class="pmd-card-body">
+                                      <h2>
+                                        <%= link_to project.title, project_path(project) %>
+                                      </h2>
+                                        <% if project.users.empty? %>
+                                          <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
+                                        <% end %>
+                          <% end %>
+                        </div>
+                  <div class=" col-md-6 user_darkblue">
+                    <div>
+                      <h2 class="user_title_desc"> Pending Approval </h2>
+                    </div>
+                    <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
+                      <div class="pmd-card pmd-card-default pmd-z-depth">
+                        <h2> <%= link_to project.title, project_path(project) %> </h2>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+          </div>
+<% else %>
+      <div class= "container-fluid user_darkblue">
+        <div class= "container user_darkblue">
+            <div class= "row">
+                <div class= "col-sm-6 user_darkblue">
                     <table>
                       <div>
-                        <h1> Projects Pending Your Approval </h1>
+                        <h1 class= "user_title_desc"> Projects Pending Your Approval </h1>
                       </div>
                         <% Project.where(status: "awaiting_approval").each do |project| %>
-                          <div class= "col-sm-6 user_blue">
+                          <div class= "col-sm-6 user_darkblue">
                             <% if project.project_owner.department == @user.department %>
                                 <div class="pmd-card pmd-card-default pmd-z-depth">
                                     <div class="pmd-card-body">
@@ -106,10 +107,10 @@
                         <% end %>
                       </table>
                     </div>
-                  <div class=" col-sm-6 user_blue">
-                      <h1 class="projects_title_bk "> Projects You've Approved </h1>
+                  <div class=" col-sm-6 user_darkblue">
+                      <h1 class="user_title_desc"> Projects You've Approved </h1>
                       <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
-                          <div class= "col-sm-4 user_blue">
+                          <div class= "col-sm-4 user_darkblue">
                             <div class="pmd-card pmd-card-default pmd-z-depth">
                                   <div class="pmd-card-body">
                                       <%= link_to project.title, project_path(project) %>
@@ -122,4 +123,5 @@
               </div>
           </div>
       </div>
+    </div>
 <br><br><br><br><br><br>
