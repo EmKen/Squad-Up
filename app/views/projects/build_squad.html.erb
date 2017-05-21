@@ -27,7 +27,7 @@
 					<%= image_tag "Staff#{[1,2,3,4,5].sample}.png", class: "card_img" %>
 					<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
 						<h2 class="pmd-card-title-text"><%= skill.skill_name %> </h2>
-						<% skill.users.each do |user| %>
+						<% skill.users.where.not(id: current_user.id).each do |user| %>
 							<div>
 								<%= form.label "#{user.first_name} #{user.last_name}" %>
 								<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]", label: "#{user.first_name} #{user.last_name}"}, user.id, nil %>
