@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   get "projects/:id/build_squad" => "projects#build_squad", as: "project_build_squad"
   get "projects/:id/team_members" => "projects#team_members", as: "project_team_members"
   get "projects/:id/edit_skills" => "projects#edit_skills", as: "edit_project_skills"
+  patch "projects/:id/update_skills" => "projects#update_skills", as: "update_project_skills"
   get "users/:id/skills" => "users#skills", as: "user_skills"
   post "users/:id/add_skills" => "users#add_skills", as: "add_user_skills"
 

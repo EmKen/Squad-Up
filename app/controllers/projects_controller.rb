@@ -59,6 +59,14 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 	end
 
+	def update_skills
+		@project = Project.find(params[:id])
+		@project.skills = Skill.where(id: params[:project][:skills])
+		if @project.save
+			redirect_to project_build_squad_path(@project)
+		end
+	end
+
 	private
 
   def project_params
