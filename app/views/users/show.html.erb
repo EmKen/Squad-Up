@@ -9,8 +9,7 @@
           <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
             <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
             <h3 class="middle1"> <%= @user.job_title %> </h3><br>
-              <button type="submit" class="btn btn-primary center-block btn-lg ">Edit your own skillset
-              </button>
+              <%= button_to "Edit your own skillset", user_skills_path(@user), method: :get, class:"btn btn-primary center-block btn-lg"%>
         </div>
           <div class="col-sm-6"{
               background-color: #2C96A3;
