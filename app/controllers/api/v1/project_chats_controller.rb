@@ -3,7 +3,7 @@ class Api::V1::ProjectChatsController < Api::V1::ApplicationController
 		chat = ProjectChat.new(project_id:params["project_id"].to_i,user_id:current_user.id,message:params["message"])
 		if chat.save
       ActionCable.server.broadcast 'messages',
-        chat
+        chat_message_object: chat
       head :ok
 		else
 			render json:chat.errors.messages
