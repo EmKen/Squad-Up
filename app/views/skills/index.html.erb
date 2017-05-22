@@ -1,37 +1,3 @@
-
-<!-- <div class="add-skill" data-turbolinks='false'> -->
-	<%#= f.select :skill_name, Skill.joins(:employee_skills).select('skills.*,employee_skills.*, count(skills.category) as category_count, count(employee_skills.skill_name as employee_count').group('skills.category').order('category_count DESC').pluck('skills.skill_name','skill.category','skills.'), {prompt:"Select skills to add"} %>
-	<%#= form_for current_user.skills.new, remote:true do |f| %>
-		<%# arr = Skill.joins(:user_skills).select('skills.*,user_skills.*, COUNT(skills.category) AS category_count, COUNT(skills.id) as user_count').group('skills.category, skills.id').order('category_count DESC').pluck('skills.skill_name','user_count','skill.category','category_count') %>
-	<%# arr_within_arr = Skill.all %>
-		<!-- <select name='skill[skill_name]' id='skill_skill_name' class="selectpicker" >
-			<option value="">Select a skill to add:</option>
-			<%# arr_within_arr.each_with_index do |arr,i| %>
-				<%# if i == 0 %>
-					<optgroup label='<%#=arr[2]%> - count: <%#=arr[3]%> employee(s)' >
-						<option value='<%#=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%#=arr[1]%> employee(s) have this skill!'><%#=arr[0]%></option>
-				<%# elsif i == arr_within_arr.length - 1 && arr[2] == arr_within_arr[i-1][2] %>
-						<option value='<%#=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%#=arr[1]%> employee(s) have this skill!'><%#=arr[0]%></option>
-					</optgroup>
-				<%# elsif i == arr_within_arr.length - 1 && arr[2] != arr_within_arr[i-1][2] %>
-					<optgroup label='<%#=arr[2]%> - count: <%#=arr[3]%> employee(s)' >
-						<option value='<%#=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%#=arr[1]%> employee(s) have this skill!'><%#=arr[0]%></option>
-					</optgroup>
-				<%# elsif arr[2] != arr_within_arr[i-1][2] %>
-					</optgroup>
-					<optgroup label='<%#=arr[2]%> - count: <%#=arr[3]%> employee(s)' >
-						<option value='<%#=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%#=arr[1]%> employee(s) have this skill!'><%#=arr[0]%></option>
-				<%# else %>
-						<option value='<%#=arr[0]%>' data-toggle="tooltip" data-placement="right" title='<%#=arr[1]%> employee(s) have this skill!'><%#=arr[0]%></option>
-				<%# end %>
-			<%# end %>
-		</select>
-		<%#= f.submit %>
-	<%# end %> -->
-
-
-
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 index_biege middle">
@@ -40,7 +6,7 @@
 			<div class="subtext"> Looking for relevant skills? </div>
 			<div class="subtext"> Get mentorship here. </div>
 		</div>
-		<div class="col-md-6 index_blue middle">
+		<div class="col-md-6 index_blue3 middle">
 			<%= image_tag "index_skill.png", class:"my-img center-block"  %>
 		</div>
 	</div>
@@ -52,7 +18,7 @@
 				<%= image_tag "skill#{[1,2,3].sample}.png", class: "card_img" %>
 				<div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
 					<h2 class="pmd-card-title-text">
-		  		<%=link_to "#{skill.skill_name}", skill_path(skill) %>
+		  		<%=link_to "#{skill.skill_name}", skills_path(skill) %>
 					</h2>
 			  	<span class="pmd-card-subtitle-text">
 			  		<% skill.users.each do |user| %>
