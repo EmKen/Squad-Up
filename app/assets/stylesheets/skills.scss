@@ -19,19 +19,24 @@
   }
 
 .skills_card {
-padding-left: 40px;
+padding-left: 10px;
 padding-top: 10px;
 float: 10px;
 position: relative;
 }
 
 .skills_button {
-padding-left: 20px;
-position: absolute;
-left: 40;
-bottom: 0;
-margin-left: -10px !important;
+  position: absolute;
+  width: 89%;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
+
+.btn-primary, .dropdown-toggle.btn-primary {
+  background-color: #445b71;
+}
+
 
 .parallax_index {
     /* The image used */
@@ -61,6 +66,11 @@ margin-left: -10px !important;
     background-size: cover;
 }
 
+.my-img {
+  min-height: 100%;
+  width: 300px;
+}
+
 .index_biege {
 background-color: #EB8023;
 height: 300px;
@@ -73,6 +83,11 @@ padding-top: 15px;
 
 .index_blue2 {
 background-color: #B3E1E8;
+}
+
+.index_blue3 {
+background-color: #B3E1E8;
+height: 300px;
 }
 
 .text {

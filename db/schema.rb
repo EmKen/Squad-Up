@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 20170521184550) do
   create_table "mentorships", force: :cascade do |t|
     t.integer  "mentor_id"
     t.integer  "mentee_id"
-    t.boolean  "request"
-    t.string   "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "request_approval"
+    t.text     "mentor_message"
+    t.text     "mentee_message"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "project_chats", force: :cascade do |t|
