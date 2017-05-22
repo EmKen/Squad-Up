@@ -1,28 +1,4 @@
 
-<div class="container">
-  <br><br><br><br>
-  <div class="row">
-    <div class=" col-sm-6">
-      <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
-      <h1 class="middle1">
-        <%= @user.first_name %>
-        <%= @user.last_name %>
-      </h1>
-      <h3 class="middle1">
-        <%= @user.job_title %>
-      </h3><br>
-      <div class="text-center">
-        <%= button_to "Edit Your Skillset", sign_out_path, method: :get, class:"btn btn-primary btn-md btn-block"%>
-        </button>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <h1 class="middle1">
-        What's your project?
-      </h1>
-      <%= form_for @project do |form| %>
-      <div class="form-group">
-
 <div class="container" data-turbolinks="false">
 
   <br><br><br><br>
@@ -39,43 +15,82 @@
         <% end %>
       <% end %>
       <br>
-      <h1 class="middle1 full-name"> 
-        <%= @user.first_name %> 
-        <%= @user.last_name %> 
+      <h1 class="middle1 full-name">
+        <%= @user.first_name %>
+        <%= @user.last_name %>
       </h1>
-      <h3 class="middle1"> 
-        <%= @user.job_title %> 
+      <h3 class="middle1">
+        <%= @user.job_title %>
       </h3><br>
       <div class="text-center">
-        <%= button_to "Edit Your Skillset", sign_out_path, method: :get, class:"btn btn-primary btn-md btn-block"%>
+        <% if @user == current_user %>
+          <%= button_to "Edit Your Skillset", user_skills_path(@user), method: :get, class:"btn btn-primary btn-md btn-block"%>
+        <% end %>
       </div>
     </div>
+
     <div class="col-sm-6">
-      <h1 class="middle1"> 
-        What's your project? 
-      </h1>
-      <%= form_for @project do |form| %> 
-      <div class="form-group"> 
-
-        <div>
-          <%= form.label :title, "Project Name" %>
-          <%= form.text_field :title, class: "form-control" %>
-        </div>
-        <div>
-          <%= form.label :description, "Project Description" %>
-          <%= form.text_area :description, class: "form-control", rows: "3"%>
-        </div>
-
-        <h1 class="middle1"> 
-          Choose skills needed for project
+      <% if current_user == @user %>
+        <h1 class="middle1">
+          What's your project?
         </h1>
-        <%= render partial: 'users/skills_form', object: form %>
-        <br>
-        <div>
-          <%= form.submit @user.staff? ? "Submit for Approval": "Build Squad", class: "btn btn-primary btn-lg btn-block" %>
+        <%= form_for @project do |form| %>
+          <div class="form-group">
 
+            <div>
+              <%= form.label :title, "Project Name" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <div>
+              <%= form.label :description, "Project Description" %>
+              <%= form.text_area :description, class: "form-control", rows: "3"%>
+            </div>
+
+            <h1 class="middle1">
+              Choose skills needed for project
+            </h1>
+            <%= render partial: 'users/skills_form', object: form %>
+            <br>
+
+            <div>
+              <%= form.submit @user.staff? ? "Submit for Approval": "Build Squad", class: "btn btn-primary btn-lg btn-block" %>
+            </div>
+
+          </div>
+        <% end %>
+      <% else %>
+        <div class="project-show">
+          <h1>
+            <%= "#{@user.first_name}'s projects" %>
+          </h1>
+          <% if @user.projects.exists? || @user.managed_projects.exists? %>
+            <table>
+              <tr class="row">
+                <th class="col-md-6">Project</th>
+                <th class="col-md-6">Role</th>
+              </tr>
+              <% if @user.managed_projects.exists? %>
+                <% @user.managed_projects.each do |project| %>
+                  <tr class="row">
+                    <td class="col-md-6"><%= project.title %></td>
+                    <td class="col-md-6">Project owner</td>
+                  </tr>
+                <% end %>
+              <% end %>
+              <% if @user.projects.exists? %>
+                <% @user.project_team_members.each do |p| %>
+                  <tr class="row">
+                    <td class="col-md-6"><%= p.project.title %></td>
+                    <td class="col-md-6"><%= p.project_skill.skill.skill_name %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+          <% else %>
+            <h1><%= @user.first_name %> is not part of any projects!</h1>
+          <% end %>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
@@ -86,99 +101,98 @@
 
 <div class="container-fluid user_darkblue">
 
-
   <% if @user.staff? %>
-  <div class="container-fluid user_darkblue">
-    <div class="container user_darkblue">
-      <div class="row">
-        <div class=" col-md-6 user_darkblue fix-this">
-          <div>
-            <h1 class="user_title_desc">
-              Approved Projects
-            </h1>
-          </div>
+    <div class="container-fluid user_darkblue">
+      <div class="container user_darkblue">
+        <div class="row">
+          <div class=" col-md-6 user_darkblue fix-this">
 
-
-          <% @user.managed_projects.where(status: "approved").each do |project| %>
-          <div class="pmd-card pmd-card-default pmd-z-depth">
-            <div class="pmd-card-body">
-              <h2>
-                <%= link_to project.title, project_path(project) %>
-              </h2>
-              <% if project.users.empty? %>
-              <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
-
-        </div>
-        <div class=" col-md-6 user_darkblue">
-          <div>
-            <h2 class="user_title_desc">
-              Pending Approval
-            </h2>
-          </div>
-          <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
-          <div class="pmd-card pmd-card-default pmd-z-depth">
-            <h2>
-              <%= link_to project.title, project_path(project) %>
-            </h2>
-          </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% else %>
-  <div class="container-fluid user_darkblue">
-    <div class="container user_darkblue">
-      <div class="row">
-        <div class="col-md-6 user_darkblue">
-          <table>
             <div>
               <h1 class="user_title_desc">
-                Projects Pending Your Approval
+                Approved Projects
               </h1>
             </div>
-            <% Project.where(status: "awaiting_approval").each do |project| %>
-            <% if project.project_owner.department == @user.department %>
-            <div class="col-sm-6 user_darkblue">
+
+            <% @user.managed_projects.where(status: "approved").each do |project| %>
               <div class="pmd-card pmd-card-default pmd-z-depth">
                 <div class="pmd-card-body">
                   <h2>
                     <%= link_to project.title, project_path(project) %>
-                    <div><br>
-                      <!-- <div style="display: inline; padding-right: 60px; float: 10px;"  > -->
-                      <%= link_to "Approve", project_approve_path(project), class: "btn btn-primary"%>
-                      <%= link_to "Refuse", project_refuse_path(project), class: "btn btn-primary" %>
-                    </div>
-                  </div>
+                  </h2>
+                  <% if project.users.empty? %>
+                    <%= link_to "Build Squad", project_path(project), class: "btn btn-primary" %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+          <div class=" col-md-6 user_darkblue">
+            <div>
+              <h2 class="user_title_desc">
+                Pending Approval
+              </h2>
+            </div>
+            <% @user.managed_projects.where(status: "awaiting_approval").each do |project| %>
+              <div class="pmd-card pmd-card-default pmd-z-depth">
+                <h2>
+                  <%= link_to project.title, project_path(project) %>
                 </h2>
               </div>
-            </div>
-              <% end %>
             <% end %>
-          </table>
-        </div>
-        <div class=" col-md-6 user_darkblue">
-          <h1 class="user_title_desc">
-            Projects You've Approved
-          </h1>
-          <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
-          <div class="col-sm-4 user_darkblue">
-            <div class="pmd-card pmd-card-default pmd-z-depth">
-              <div class="pmd-card-body">
-                <%= link_to project.title, project_path(project) %>
-              </div>
-            </div>
           </div>
-          <% end %>
         </div>
       </div>
     </div>
-
-  </div>
+  <% else %>
+    <div class="container-fluid user_darkblue">
+      <div class="container user_darkblue">
+        <div class="row">
+          <div class="col-md-6 user_darkblue">
+            <table>
+              <div>
+                <h1 class="user_title_desc">
+                  Projects Pending Your Approval
+                </h1>
+              </div>
+              <% Project.where(status: "awaiting_approval").each do |project| %>
+                <% if project.project_owner.department == @user.department %>
+                  <div class="col-sm-6 user_darkblue">
+                    <div class="pmd-card pmd-card-default pmd-z-depth card_height">
+                      <div class="pmd-card-body">
+                        <h2>
+                          <div class="enlarge_text">
+                            <%= link_to project.title, project_path(project) %>
+                          </div>
+                          <div><br>
+                            <%= link_to "Approve", project_approve_path(project), class: "btn btn-primary "%>
+                            <%= link_to "Refuse", project_refuse_path(project), class: "btn btn-primary" %>
+                          </div>
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </table>
+          </div>
+          <div class=" col-md-6 user_darkblue">
+            <h1 class="user_title_desc">
+              Projects You've Approved
+            </h1>
+            <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
+              <div class="col-sm-4 user_darkblue">
+                <div class="pmd-card pmd-card-default pmd-z-depth">
+                  <div class="pmd-card-body">
+                    <%= link_to project.title, project_path(project) %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 
