@@ -32,6 +32,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
           <ul class="nav navbar-nav navbar-right">
           <%= button_to "Sign Out", sign_out_path, method: :delete, class:"btn btn-primary btn-md btn-block"%>
           </ul>
@@ -40,6 +41,9 @@
             </ul>
           <ul class="nav navbar-nav navbar-right">
           <%= button_to "Profile", user_path(current_user), method: :get, class:"btn btn-primary btn-md btn-block"%>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <%= button_to "All Projects", projects_path, method: :get, class:"btn btn-primary btn-md btn-block"%>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
