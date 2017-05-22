@@ -22,10 +22,24 @@ class Api::V1::MentorshipsController < Api::V1::ApplicationController
 	end
 
 	def mentor # show all mentor for current user
-		render json:current_user.mentors.ids
+		mentors_array = []
+		current_user.mentors.each do |u|
+			user_hash = Mentorship.find_by(mentee_id:current_user.id,mentor_id:u.id).attributes
+			user_hash["first_name"] = u.first_name
+			user_hash["last_name"] = u.last_name
+			mentors_array << user_hash
+		end
+		render json:mentors_array
 	end
 
 	def mentee
-		render json:current_user.mentees.ids
+		mentees_array = []
+		current_user.mentees.each do |u|
+			user_hash = Mentorship.find_by(mentee_id:u.id,mentor_id:current_user.id).attributes
+			user_hash["first_name"] = u.first_name
+			user_hash["last_name"] = u.last_name
+			mentees_array << user_hash
+		end
+		render json:mentees_array
 	end
 end
