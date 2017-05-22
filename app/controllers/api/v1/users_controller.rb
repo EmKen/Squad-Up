@@ -7,14 +7,20 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 	def index
 		company = current_user.company
 		users = User.where("company_id = #{company.id}")
-		users_array = users.map { |user| user.attributes }
+		
+		users_array = []
+		
 		users.each_with_index do |user,i|
+			user_hash = user.attributes
+			user_hash["profile_picture"] = user.profile_picture.url
 			arr = user.skills
 			arr = arr.map do |skill|
 				skill.attributes
 			end
-			users_array[i]["skills_array"] = arr
-		end
+			user_hash["skills_array"] = arr
+			users_array << user_hash
+		end		
+		
 		render json:users_array
 	end	
 
@@ -36,6 +42,9 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		else 
 			user = user_or_id
 		end
+		user_dup = user.attributes
+		user_dup["profile_picture"] = user.profile_picture.url
+		
 		skills = user.skills
 
 		own_project = user.managed_projects 
@@ -44,7 +53,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 		joined_project = user.projects - own_project
 		joined_project_array = give_project_array_of_hashes(joined_project,user.id)
 
-		render json:[user,skills,own_project_array,joined_project_array]
+		render json:[user_dup,skills,own_project_array,joined_project_array]
 	end
 
 	def give_current_user
