@@ -6,6 +6,7 @@ class SkillsController < ApplicationController
 
 	def index
 		@skills = Skill.all
+		@mentorship = Mentorship.new
 	end
 
 	def create
