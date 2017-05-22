@@ -1,46 +1,57 @@
-
-
-
-<div class="container">
+<div class="container" data-turbolinks="false">
 
   <br><br><br><br>
-      <div class="row">
-        <div class=" col-sm-6">
-          <%= image_tag "admin.png", class:"img-circle my-img center-block"  %>
-            <h1 class="middle1"> <%= @user.first_name %> <%= @user.last_name %> </h1>
-            <h3 class="middle1"> <%= @user.job_title %> </h3><br>
 
-              <%= button_to "Edit your own skillset", user_skills_path(@user), method: :get, class:"btn btn-primary center-block btn-lg"%>
+  <div class="row">
+    <div class="col-sm-6">
+      <!-- Displays the profile picture. If own profile, able to amend/upload picture. -->
+      <%= profile_picture_helper %>
+      <% if current_user == @user%>
+        <div><a href="" id="edit-icon"><%= image_tag "edit_icon.png", title:"Change profile picture"%></a></div>
+        <%= form_for @user, data: { remote:true, type:"script", disable_with: "Uploading.." } do |form|  %>
+          <%= form.file_field(:profile_picture) %>
+          <%= form.submit "Upload profile picture" %>
+        <% end %>
+      <% end %>
+      <br>
+      <h1 class="middle1 full-name"> <%= @user.first_name %> <%= @user.last_name %> </h1>
+      <h3 class="middle1"> <%= @user.job_title %> </h3><br>
+      <button type="submit" class="btn btn-primary center-block btn-lg ">Edit your own skillset
+      </button>
+    </div>
+    <div class="col-sm-6">
+
+
+      <h1 class="middle1"> What's your project? </h1>
+
+
+      <%= form_for @project do |form| %> 
+      <div class="form-group"> 
+        <div>
+          <%= form.label :title, "Project Name" %>
+          <%= form.text_field :title, class: "form-control" %>
         </div>
-          <div class="col-sm-6">
-
-            <h1 class="middle1"> What's your project? </h1>
-
-              <%= form_for @project do |form| %>
-                    <div class="form-group">
-                      <div>
-                        <%= form.label :title, "Project Name" %>
-                        <%= form.text_field :title, class: "form-control" %>
-                      </div>
-                        <div>
-                          <%= form.label :description, "Project Description" %>
-                          <%= form.text_area :description, class: "form-control", rows: "3"%>
-                        </div>
-                        <h1 class="middle1"> Choose skills needed for project</h1>
-
-                        <%= render partial: 'users/skills_form', object: form %>
-                      <br>
-                      <div>
-                        <%= form.submit @user.manager? ? "Build Squad" : "Submit for Approval", class: "btn btn-primary btn-lg btn-block" %>
-                      </div>
-                    </div>
-              <% end %>
-          </div>
+        <div>
+          <%= form.label :description, "Project Description" %>
+          <%= form.text_area :description, class: "form-control", rows: "3"%>
+        </div>
+        <h1 class="middle1"> Choose skills needed for project</h1>
+        <%= render partial: 'users/skills_form', object: form %>
+        <br>
+        <div>
+          <%= form.submit @user.staff? ? "Submit for Approval": "Build Squad", class: "btn btn-primary btn-lg btn-block" %>
+        </div>
       </div>
+      <% end %>
+    </div>
+  </div>
+
+
 </div>
 
 <br>
 <br>
+
 
 
 <div class= "container-fluid user_darkblue">
@@ -124,4 +135,5 @@
           </div>
       </div>
     </div>
+
 <br><br><br><br><br><br>
