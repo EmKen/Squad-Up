@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many    :mentors, through: :mentoring, source: :mentor
   has_many    :mentoring, foreign_key:'mentee_id', class_name:"Mentorship"
 
+  mount_uploader :profile_picture, AvatarUploader
+
   enum access_level: { staff: 0, manager: 1, admin: 2 }
   before_save :generate_private_token
 

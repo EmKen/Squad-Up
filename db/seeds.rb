@@ -152,13 +152,13 @@ end
 
 ActiveRecord::Base.transaction do
 
-  ProjectTeamMember.create(project_id: 1,user_id: 1,project_skill_id: 1)
-  ProjectTeamMember.create(project_id: 2,user_id: 2,project_skill_id: 2)
-  ProjectTeamMember.create(project_id: 3,user_id: 3,project_skill_id: 3)
-  ProjectTeamMember.create(project_id: 4,user_id: 4,project_skill_id: 4)
-  ProjectTeamMember.create(project_id: 5,user_id: 5,project_skill_id: 5)
-  ProjectTeamMember.create(project_id: 6,user_id: 6,project_skill_id: 6)
-  ProjectTeamMember.create(project_id: 7,user_id: 7,project_skill_id: 7)
+  ProjectTeamMember.create(project_id: 1,user_id: 2,project_skill_id: 1)
+  ProjectTeamMember.create(project_id: 2,user_id: 3,project_skill_id: 2)
+  ProjectTeamMember.create(project_id: 3,user_id: 4,project_skill_id: 3)
+  ProjectTeamMember.create(project_id: 4,user_id: 5,project_skill_id: 4)
+  ProjectTeamMember.create(project_id: 5,user_id: 6,project_skill_id: 5)
+  ProjectTeamMember.create(project_id: 6,user_id: 7,project_skill_id: 6)
+  ProjectTeamMember.create(project_id: 7,user_id: 8,project_skill_id: 7)
 
 end
 
