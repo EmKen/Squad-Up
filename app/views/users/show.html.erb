@@ -61,19 +61,20 @@
         <% end %>
       <% else %>
         <div class="project-show">
-          <h1>
+          <h1 class="projects_header_bk">
             <%= "#{@user.first_name}'s projects" %>
           </h1>
+          <hr>
           <% if @user.projects.exists? || @user.managed_projects.exists? %>
             <table>
               <tr class="row">
-                <th class="col-md-6">Project</th>
-                <th class="col-md-6">Role</th>
+                <th class="col-md-6 projects_sub_bk">Project</th>
+                <th class="col-md-6 projects_sub_bk">Role</th>
               </tr>
               <% if @user.managed_projects.exists? %>
                 <% @user.managed_projects.each do |project| %>
                   <tr class="row">
-                    <td class="col-md-6"><%= project.title %></td>
+                    <td class="col-md-6"><%= link_to project.title, project_path(project) %></td>
                     <td class="col-md-6">Project owner</td>
                   </tr>
                 <% end %>
@@ -81,7 +82,7 @@
               <% if @user.projects.exists? %>
                 <% @user.project_team_members.each do |p| %>
                   <tr class="row">
-                    <td class="col-md-6"><%= p.project.title %></td>
+                    <td class="col-md-6"><%= link_to p.project.title, project_path(p.project) %></td>
                     <td class="col-md-6"><%= p.project_skill.skill.skill_name %></td>
                   </tr>
                 <% end %>
@@ -182,7 +183,7 @@
             </h1>
             <% Project.where(status: "approved", approved_or_refused_by_id: "#{@user.id}").each do |project| %>
               <div class="col-sm-4 user_darkblue">
-                <div class="pmd-card pmd-card-default pmd-z-depth">
+                <div class="pmd-card pmd-card-default pmd-z-depth card_height_approved">
                   <div class="pmd-card-body">
                     <%= link_to project.title, project_path(project) %>
                   </div>

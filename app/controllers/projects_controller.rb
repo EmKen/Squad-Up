@@ -16,6 +16,14 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def index
+		company = current_user.company
+		@projects = []
+		Project.all.each do |project|
+			@projects << project if project.project_owner.company == company
+		end
+	end
+
 	def show
 		@project = Project.find(params[:id])
 	end
