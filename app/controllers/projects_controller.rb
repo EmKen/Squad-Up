@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 	def create
 		@project = current_user.managed_projects.new(project_params)
 		@project.skills = Skill.where(id: params[:project][:skills])
-		if current_user.manager?
+		if !current_user.staff?
 			@project.approved!
 			@project.approved_or_refused_by = current_user
 			if @project.save
@@ -13,6 +13,14 @@ class ProjectsController < ApplicationController
 			if @project.save
 				redirect_to "/"
 			end
+		end
+	end
+
+	def index
+		company = current_user.company
+		@projects = []
+		Project.all.each do |project|
+			@projects << project if project.project_owner.company == company
 		end
 	end
 

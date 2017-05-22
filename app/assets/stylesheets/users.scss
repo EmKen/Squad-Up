@@ -19,6 +19,21 @@
   text-align: center;
 }
 
+.usersheader {
+ font-size: 50px;
+ color: black;
+}
+
+.hruser {
+    border: none;
+    height: 20px;
+}
+
+.userssub {
+ font-size: 20px;
+ color: black;
+}
+
 .user_blue {
   background-color: #B3E1E8;
 }
@@ -28,6 +43,16 @@
   width: 20px;
   float: right;
   margin-right: 150px;
+}
+
+.card_height {
+    /* Set a specific height */
+    min-height: 150px;
+}
+
+.card_height_approved {
+    /* Set a specific height */
+    min-height: 120px;
 }
 
 .edit_user {
@@ -42,9 +67,33 @@
 background-color: #2C3E50;
 }
 
+.user_skill_height {
+min-height: 100px;
+}
+
 .user_title_desc {
   font-size: 30px;
   color: white;
   weight: 30;
 }
 
+.user_skills_title_desc {
+  font-size: 50px;
+  color: white;
+  weight: 30;
+}
+
+.user_skills_sub {
+  font-size: 30px;
+  color: white;
+  weight: 30;
+}
+.user_skills_info {
+  font-size: 20px;
+  color: white;
+  weight: 30;
+}
+
+.project-show {
+  margin: 0 auto;
+}

@@ -14,7 +14,7 @@ class UsersController < Clearance::UsersController
 	def update
 		@user = User.find(params[:id])
 		respond_to do |format|
-			if params[:user].nil? || params[:user][:profile_picture].nil? 
+			if params[:user].nil? || params[:user][:profile_picture].nil?
 				format.html {
 					flash.now[:danger] = "There is no file selected."
 					@project = Project.new
@@ -23,9 +23,9 @@ class UsersController < Clearance::UsersController
 				format.js { render:'no_file', status: :unprocessable_entity }
 			elsif @user.update(user_params)
 				format.html { redirect_back_or user_path(@user) }
-				format.js 
-			else 
-				format.html { 
+				format.js
+			else
+				format.html {
 					flash.now[:danger] = "Invalid file extension, only file of formats .jpg/ .jpeg/ .gif/ .png,/ .tiff are allowed."
 					@project = Project.new
 					render 'users/show'
@@ -33,7 +33,7 @@ class UsersController < Clearance::UsersController
 				format.js { render:'upload_errors', status: :unprocessable_entity }
 			end
 		end
-	end		
+	end
 
 
 	def add_skills
@@ -41,20 +41,23 @@ class UsersController < Clearance::UsersController
 		if params[:skill_ids].present?
 			params[:skill_ids].each do |skill_id|
 				UserSkill.create(user_id: @user.id, skill_id: skill_id)
+				flash[:success] = "Your new skill(s) have been added."
 			end
 		end
-		if params[:skill][:skill_name]
+		if params[:skill][:skill_name].present?
 			skill = Skill.new(skill_name: params[:skill][:skill_name].titleize, category: params[:skill][:category])
 			if skill.save
 				UserSkill.create(user_id: @user.id, skill_id: skill.id)
+				flash[:success] = "Your new skill(s) have been added."
 			else
-				errors = []
-				skill.errors.messages.values.each do |msg|
-					msg.each do  |m|
-						errors << m
-					end
-				end
-				flash.alert = errors
+				# errors = []
+				# skill.errors.messages.values.each do |msg|
+				# 	msg.each do  |m|
+				# 		errors << m
+				# 	end
+				# end
+				# flash.alert = errors
+				flash[:danger] = skill.errors.full_messages.join(".")
 			end
 		end
 		redirect_to user_skills_path(@user)

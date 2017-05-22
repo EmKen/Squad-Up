@@ -1,0 +1,30 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6 index_biege middle">
+			<br>
+			<div class="herotext"> All Projects! </div>
+			<div class="subtext"> View all projects your company is working on </div>
+			<div class="subtext"> Get mentorship here. </div>
+		</div>
+		<div class="col-md-6 index_blue3 middle">
+			<%= image_tag "index_skill.png", class:"my-img center-block"  %>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+      <% @projects.each do |project| %>
+      <div class="col-md-3">
+      <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
+
+          <h2 class="pmd-card-title-text">
+            <%= project.title %>
+          </h2>
+          <span class="pmd-card-subtitle-text">
+            <%= project.description %>
+          </span>
+        </div>
+        </div>
+      <%end%>
+	</div>
+</div>

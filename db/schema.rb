@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170522114724) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +28,13 @@ ActiveRecord::Schema.define(version: 20170522114724) do
   create_table "mentorships", force: :cascade do |t|
     t.integer  "mentor_id"
     t.integer  "mentee_id"
-    t.boolean  "request_approval"
+    t.integer  "status",         default: 0
     t.text     "mentor_message"
     t.text     "mentee_message"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "skill_id"
+    t.index ["skill_id"], name: "index_mentorships_on_skill_id", using: :btree
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -111,7 +115,6 @@ ActiveRecord::Schema.define(version: 20170522114724) do
     t.string   "remember_token",     limit: 128,             null: false
     t.string   "private_token"
     t.string   "profile_picture"
-    t.boolean  "notification"
     t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree

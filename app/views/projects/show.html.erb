@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row row_darkblue">
         <div class="col-md-6 projects_darkblue">
             <h1 class= "projects_title_desc">
               Project Name
@@ -35,29 +35,32 @@
                 </div>
               <% end %>
 
-         <% if @project.users.exists? %>
+          <% if @project.users.exists? %>
             <table>
               <tr>
                 <h1 class="projects_header_bk"> Team Members </h1>
-              <tr> 
+              <tr>
               <% @project.users.each do |user| %>
                 <tr>
                   <td><%= user.first_name %> <%= user.last_name %> </td>
-                  <td><%= ProjectTeamMember.find_by(project_id: @project.id, user_id: user.id).status.titleize %> </td> 
+                  <td><%= ProjectTeamMember.find_by(project_id: @project.id, user_id: user.id).status.titleize %> </td>
                 </tr>
-             <% end %>
+              <% end %>
+            </table>
           <% end %>
     </div>
   </div>
+</div>
 
+<div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-md-4 middle projects_beige">
+    <div class="col-md-4 middle projects_beige">
     </div>
-    <div class="col-xs-6 col-md-4 middle projects_beige">
+    <div class="col-md-4 middle projects_beige">
       <br><br><br>
       <%= button_to "Back to Profile", user_path(current_user), method: "get", class: "btn btn-primary btn-lg btn-block" %>
     </div>
-    <div class="col-xs-6 col-md-4 middle projects_beige">
-
+    <div class="col-md-4 middle projects_beige">
     </div>
   </div>
+</div>

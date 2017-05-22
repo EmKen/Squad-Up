@@ -16,9 +16,16 @@
 </div>
 
 
-
 <div class="container-fluid index_darkblue">
-	<h1> Select your team below</h1>
+	<div class="row">
+		<div class="col-sm-3">
+		</div>
+				<div class="col-sm-6 middle">
+						<h1 class="herotext_squad"> Select your team below</h1>
+				</div>
+		<div class="col-sm-3">
+		</div>
+	</div>
 	<br><br><br>
 	<%= form_for @project, url: project_team_members_path, method: "get" do |form| %>
 		<div class="row">

@@ -13,6 +13,11 @@
  font-weight: 900;
  color: white;
 }
+.herotext_tweak {
+ font-size: 50px;
+ font-weight: 50;
+ color: black;
+}
 
 .projects_title_desc {
   font-size: 20px;
@@ -58,9 +63,14 @@ background-color: #2C3E50;
 height: 400px;
 }
 
+.row_darkblue {
+background-color: #2C3E50;
+}
+
 .projects_blue2 {
 background-color: #B3E1E8;
-height: 400px;
+min-height: 400px;
+padding-bottom: 4px;
 }
 
 .projects_beige {
