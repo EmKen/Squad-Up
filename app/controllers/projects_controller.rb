@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 	def create
 		@project = current_user.managed_projects.new(project_params)
 		@project.skills = Skill.where(id: params[:project][:skills])
-		if current_user.manager?
+		if !current_user.staff?
 			@project.approved!
 			@project.approved_or_refused_by = current_user
 			if @project.save
