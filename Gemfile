@@ -59,3 +59,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # RailsAdmin
 gem 'rails_admin', '~> 1.1.1'
+
+gem 'figaro'
+
+gem 'carrierwave', '~> 1.0'
+
+gem "mini_magick"
+
+gem 'fog'

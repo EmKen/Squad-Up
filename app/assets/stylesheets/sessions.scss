@@ -3,17 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .parallax1 {
-    /* The image used */
-    background-image: url("homeimage.png");
+  /* The image used */
+  background-image: url("homeimage.png");
 
-    /* Set a specific height */
-    min-height: 120px;
+  /* Set a specific height */
+  min-height: 120px;
 
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .landing_center{
   padding-left: 50px;
@@ -44,7 +44,7 @@
 
 .my-img {
   width: 200px;
-  padding-right: 10px;
+  height: 200px;
 }
 
 .middle {
@@ -52,6 +52,6 @@
 }
 
 .sessions_darkblue {
-background-color: #2C3E50;
-height: 400px;
+  background-color: #2C3E50;
+  height: 400px;
 }

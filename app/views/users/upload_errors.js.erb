@@ -1,0 +1,7 @@
+
+if ($('.error-message').length >= 1) {
+	$('.error-message').fadeOut('slow'); 
+	$('.error-message').remove();
+}
+$('h1.full-name').before("<p class='error-message' style='display:none;'>Wrong file extension.</p>")
+$('.error-message').fadeIn('slow');
