@@ -3,7 +3,7 @@ class CreateMentorships < ActiveRecord::Migration[5.0]
     create_table :mentorships do |t|
     	t.integer :mentor_id
       t.integer :mentee_id
-      t.boolean	:request_approval
+      t.integer	:status, default: 0
       t.text		:mentor_message
       t.text		:mentee_message
       t.timestamps

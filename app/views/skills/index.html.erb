@@ -20,15 +20,43 @@
 					<h2 class="pmd-card-title-text">
 		  		<%=link_to "#{skill.skill_name}", skills_path(skill) %>
 					</h2>
-			  	<span class="pmd-card-subtitle-text">
-			  		<% skill.users.each do |user| %>
-			  			<%=link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
-							<br>
-						<%end%>
-			  	</span>
-		    	<div class="pmd-card-actions">
-		        <button class="btn btn-primary btn-md pmd-ripple-effect btn-primary skills_button" type="button">Contact</button>
-		    	</div>
+					<%= form_for @mentorship do |form| %>
+				  	<span class="pmd-card-subtitle-text">
+				  		<% skill.users.each do |user| %>
+				  			<div style="width: 150px; display: inline-block;">
+				  				<%=link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
+				  			</div>
+				  			<%= form.hidden_field :skill_id, value: "#{skill.id}" %>
+								<%= form.radio_button :mentor_id, "#{user.id}" %>
+								<br>
+							<%end%>
+				  	</span>
+				  	<div class="pmd-card-actions">
+				  	<!-- Trigger the modal with a button -->
+							<button type="button" class="btn btn-primary btn-md pmd-ripple-effect btn-primary skills_button" data-toggle="modal" data-target="#myModal">Send Request</button>
+
+							<!-- Modal -->
+							<div id="myModal" class="modal fade" role="dialog">
+							  <div class="modal-dialog">
+
+							    <!-- Modal content-->
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        <h1 class="modal-title">Send a message with your request?</h1>
+							      </div>
+							      <div class="modal-body">
+							        <%= form.text_area :mentee_message, class: "form-control" %>
+							        <%= form.hidden_field%>
+							      </div>
+							      <div class="modal-footer">
+							        <%= form.submit "Send Request", class: "btn btn-primary" %>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						</div>
+		    	<% end %>
 				</div>
 			</div>
 		<%end%>

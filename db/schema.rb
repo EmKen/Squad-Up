@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521184550) do
+ActiveRecord::Schema.define(version: 20170522113009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,13 @@ ActiveRecord::Schema.define(version: 20170521184550) do
   create_table "mentorships", force: :cascade do |t|
     t.integer  "mentor_id"
     t.integer  "mentee_id"
-    t.boolean  "request_approval"
+    t.integer  "status",         default: 0
     t.text     "mentor_message"
     t.text     "mentee_message"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "skill_id"
+    t.index ["skill_id"], name: "index_mentorships_on_skill_id", using: :btree
   end
 
   create_table "project_chats", force: :cascade do |t|
