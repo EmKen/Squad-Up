@@ -65,6 +65,10 @@ position: relative;
     background-repeat: no-repeat;
     background-size: cover;
 }
+.card_height {
+    /* Set a specific height */
+    min-height: 150px;
+}
 
 .my-img {
   min-height: 100%;
@@ -97,6 +101,11 @@ height: 300px;
     text-align:center;
     top: 300px;
     width: 100%
+}
+
+.enlarge_text {
+  min-height: 70px;
+
 }
 
 .text1 {
