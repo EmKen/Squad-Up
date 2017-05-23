@@ -2,9 +2,10 @@ class MentorshipsController < ApplicationController
 
 	def create
 		@mentorship = Mentorship.new(mentorship_params)
+		@mentor = User.find(params[:mentorship][:mentor_id])
 		@mentorship.mentee_id = current_user.id
 		if @mentorship.save
-
+      
 			#### this part is for notification
 
 			name = "#{current_user.first_name} #{current_user.last_name}"
@@ -15,14 +16,12 @@ class MentorshipsController < ApplicationController
 					message:notification.notification_message,
 					id: notification.id
 			end
-
-			#####
-
-			redirect_to skills_path
+      flash[:success] = "Your mentorship request has been sent to #{@mentor.first_name} #{@mentor.last_name}."
 		else
 			flash[:danger] = "#{@mentorship.errors.full_messages.join(". ")}."
-			redirect_to skills_path
-		end
+    end
+			
+		redirect_to skills_path
 	end
 
 	private
