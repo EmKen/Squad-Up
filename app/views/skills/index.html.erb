@@ -27,7 +27,7 @@
 				  				<%=link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
 				  			</div>
 				  			<%= form.hidden_field :skill_id, value: "#{skill.id}" %>
-								<%= form.radio_button :mentor_id, "#{user.id}" %>
+								<%= form.radio_button :mentor_id, "#{user.id}", id: "user_id" %>
 								<br>
 							<%end%>
 				  	</span>
@@ -47,6 +47,9 @@
 							      </div>
 							      <div class="modal-body">
 							        <%= form.text_area :mentee_message, class: "form-control" %>
+
+							        <%= form.hidden_field :mentor_id, id: "mentor_id" %>
+
 							      </div>
 							      <div class="modal-footer">
 							        <%= form.submit "Send Request", class: "btn btn-primary" %>
@@ -61,3 +64,15 @@
 		<%end%>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$( "input[name='mentorship[mentor_id]'").click(function() {
+  	$("input[name='mentorship[mentor_id]'").prop("checked", false)
+  	$(this).prop("checked", true)
+	});
+		$(this).prop("checked", false)
+	$("form").change(function() {
+		var user_id = $("input[name='mentorship[mentor_id]']:checked").val();
+		$("#mentor_id").val(user_id);
+	})
+</script>

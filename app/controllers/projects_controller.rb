@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 	before_action :require_login
+	
 	def create
 		@project = current_user.managed_projects.new(project_params)
 		@project.skills = Skill.where(id: params[:project][:skills])
@@ -10,7 +11,25 @@ class ProjectsController < ApplicationController
 				redirect_to project_build_squad_path(@project)
 			end
 		else
+			name = "#{current_user.first_name} #{current_user.last_name}"
+			company = current_user.company
 			if @project.save
+				managers = company.users.where(department:current_user.department)
+				if managers.exists?
+					manager = managers.first
+					notification = manager.notifications.new(notification_message:"#{name} from your department has a new project pending for your approval.")
+				else 
+					# if no manager, HR manager to approve
+					manager = company.users.where(access_level:"admin").first
+					notification = manager.notifications.new(notification_message:"#{name} from #{current_user.department} has a new project pending for approval.")
+				end
+					
+				if notification.save
+					ActionCable.server.broadcast "notifications_#{manager.id}", 
+						message: notification.notification_message,
+						id: notification.id
+				end
+
 				redirect_to "/"
 			end
 		end
@@ -32,7 +51,14 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		@project.approved!
 		@project.approved_or_refused_by = current_user
+		project_owner = @project.project_owner 
 		if @project.save
+			notification = project_owner.notifications.new(notification_message:"Your project #{@project.title} has been approved by your manager #{current_user.first_name}.")
+			if notification.save
+				ActionCable.server.broadcast "notifications_#{project_owner.id}", 
+					message: notification.notification_message,
+					id: notification.id
+			end
 			redirect_to "/"
 		end
 	end
@@ -41,7 +67,14 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		@project.refused!
 		@project.approved_or_refused_by = current_user
+		project_owner = @project.project_owner 
 		if @project.save
+			notification = project_owner.notifications.new(notification_message:"Your project #{@project.title} has been declined by your manager #{current_user.first_name}.")
+			if notification.save
+				ActionCable.server.broadcast "notifications_#{project_owner.id}", 
+					message: notification.notification_message,
+					id: notification.id
+			end
 			redirect_to "/"
 		end
 	end
@@ -57,6 +90,12 @@ class ProjectsController < ApplicationController
 			if params["#{skill_id}"]
 				params["#{skill_id}"].each do |user_id|
 					team_member = ProjectTeamMember.create(project_id: @project.id, user_id: user_id, project_skill_id: project_skill_id)
+					notification = team_member.notifications.new(notification_message:"You have been invited to the project #{@project.title}and your role would be on #{Skill.find(skill_id).skill_name}.")
+					if notification.save
+						ActionCable.server.broadcast "notifications_#{user_id}", 
+							message: notification.notification_message,
+							id: notification.id
+					end
 				end
 			end
 		end

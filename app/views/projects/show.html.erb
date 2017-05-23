@@ -43,6 +43,7 @@
               <% @project.users.each do |user| %>
                 <tr>
                   <td><%= user.first_name %> <%= user.last_name %> </td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td><%= ProjectTeamMember.find_by(project_id: @project.id, user_id: user.id).status.titleize %> </td>
                 </tr>
               <% end %>
