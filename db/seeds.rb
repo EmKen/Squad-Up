@@ -13,18 +13,16 @@ Faker::UniqueGenerator.clear
 user = {}
 user['password'] = 'password'
 departments = ["Sales", "Marketing", "Finance"]
-first_name = Faker::Name.first_name
-last_name = Faker::Name.unique.last_name
-email = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
+
 
 ActiveRecord::Base.transaction do
-	Company.create(name: "Next Academy", admin_email: email)
+	Company.create(name: "Next Academy", admin_email: "b.jones@nextacademy.com")
 end
 
 ActiveRecord::Base.transaction do
-  user['first_name'] = first_name
-  user['last_name'] = last_name
-  user['email'] = email
+  user['first_name'] = "Bob"
+  user['last_name'] = "Jones"
+  user['email'] = "b.jones@nextacademy.com"
   user['company_id'] = 1
   user['job_title'] = "HR Manager"
   user['department'] = "Human Resources"
@@ -111,65 +109,64 @@ end
 
 
 ActiveRecord::Base.transaction do
-
-  Project.create(project_owner_id: 1, title: "Digital Length Measurement", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 2, title: "Electronic Card Locking System", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 3, title: "Access Controlled System", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 4, title: "Advanced Elevator Control", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 5, title: "Digital Tachometer", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 6, title: "Traffic Light control System", description: "public sector project under the supervision of the defence ministry")
-  Project.create(project_owner_id: 7, title: "Tale Recorder for Industries", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 8, title: "Digital Thermometer", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 9, title: "Mains Frequency Indicator", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 10, title: "Programmable Volume Control", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 11, title: "Hexadecimal Keyboard", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 12, title: "Security Monitoring System", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 13, title: "Binary To Dot-Matrix Decoder", description: "public sector project with a cooperation with tenaga nasional")
-  Project.create(project_owner_id: 14, title: "Precise Digital AC Power Controller", description: "private project , subcontract with danata Dubai")
-  Project.create(project_owner_id: 15, title: "Digital Switching System", description: "private project , subcontract with danata Dubai")
-  Project.create(project_owner_id: 16, title: "Programmable Melody Generator", description: "private project , subcontract with danata Dubai")
-  Project.create(project_owner_id: 17, title: "Pressure Monitor", description: "private project , subcontract with danata Dubai")
-  Project.create(project_owner_id: 18, title: "Digital Programmable Dark Room Controller", description: "private project , subcontract with danata Dubai")
-  Project.create(project_owner_id: 19, title: "Object Counter for Industrial Application", description: "private project, subcontract, Malaysian airline")
-  Project.create(project_owner_id: 20, title: "Universal Digital Function Generator", description: "private project, subcontract, Malaysian airline")
-  Project.create(project_owner_id: 21, title: "Automatic Spray Painting Gun", description: "private project, subcontract, Malaysian airline")
-  Project.create(project_owner_id: 22, title: "Motor Speed Controller", description: "private project, subcontract, Malaysian airline")
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 1, title: "Digital Length Measurement", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 2, title: "Electronic Card Locking System", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 3, title: "Access Controlled System", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 4, title: "Advanced Elevator Control", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 5, title: "Digital Tachometer", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 6, title: "Traffic Light control System", description: "Public sector project under the supervision of the defence ministry", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 7, title: "Tale Recorder for Industries", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 8, title: "Digital Thermometer", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 9, title: "Mains Frequency Indicator", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 10, title: "Programmable Volume Control", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 11, title: "Hexadecimal Keyboard", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 12, title: "Security Monitoring System", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 13, title: "Binary To Dot-Matrix Decoder", description: "Public sector project with a cooperation with tenaga nacional", skills: Skill.where(id: ids))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 14, title: "Precise Digital AC Power Controller", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 15, title: "Digital Switching System", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 16, title: "Programmable Melody Generator", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 17, title: "Pressure Monitor", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 18, title: "Digital Programmable Dark Room Controller", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 19, title: "Object Counter for Industrial Application", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 20, title: "Universal Digital Function Generator", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 21, title: "Automatic Spray Painting Gun", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  ids = (1..36).to_a.sample(rand(5)+3)
+  Project.create(project_owner_id: 22, title: "Motor Speed Controller", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
 
 end
+
 
 ActiveRecord::Base.transaction do
 
-  ProjectSkill.create(project_id: 1, skill_id: 6)
-  ProjectSkill.create(project_id: 1, skill_id: 5)
-  ProjectSkill.create(project_id: 2, skill_id: 5)
-  ProjectSkill.create(project_id: 3, skill_id: 4)
-  ProjectSkill.create(project_id: 4, skill_id: 3)
-  ProjectSkill.create(project_id: 5, skill_id: 2)
-  ProjectSkill.create(project_id: 6, skill_id: 1)
+  Mentorship.create(mentor_id:1,mentee_id:23,mentor_message:"See you soon at 23 :)",mentee_message:"Please mentor me :)", skill_id:User.find(1).skills.sample.id)
+  Mentorship.create(mentor_id:1,mentee_id:22,mentor_message:"See you at 22:)",mentee_message:"Please mentor me :)", skill_id:User.find(1).skills.sample.id)
+  Mentorship.create(mentor_id:5,mentee_id:1,mentor_message:"Okay",mentee_message:"Please mentor me :)",skill_id:User.find(5).skills.sample.id)
+  Mentorship.create(mentor_id:10,mentee_id:1,mentor_message:"No problem",mentee_message:"Please mentor me :)",skill_id: User.find(10).skills.sample.id)
 
 end
 
-
-ActiveRecord::Base.transaction do
-
-  ProjectTeamMember.create(project_id: 1,user_id: 2,project_skill_id: 1)
-  ProjectTeamMember.create(project_id: 2,user_id: 3,project_skill_id: 2)
-  ProjectTeamMember.create(project_id: 3,user_id: 4,project_skill_id: 3)
-  ProjectTeamMember.create(project_id: 4,user_id: 5,project_skill_id: 4)
-  ProjectTeamMember.create(project_id: 5,user_id: 6,project_skill_id: 5)
-  ProjectTeamMember.create(project_id: 6,user_id: 7,project_skill_id: 6)
-  ProjectTeamMember.create(project_id: 7,user_id: 8,project_skill_id: 7)
-
-end
-
-ActiveRecord::Base.transaction do
-
-  Mentorship.create(mentor_id:1,mentee_id:23,mentor_message:"See you soon at 23 :)")
-  Mentorship.create(mentor_id:1,mentee_id:22,mentor_message:"See you at 22:)")
-
-end
-
-arr = ["https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/2/2.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/3/1.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/4/4.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/5/5.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/6/6.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/7/7.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/9/9.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/10/10.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/11/sean-stratton-96141.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/12/12.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/13/13.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/14/14.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/15/15.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/16/16.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/17/17.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/18/18.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/19/19.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/20/20.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/21/21.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/22/22.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/23/24.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/24/25.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/1/3.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/8/8.jpg"]
+arr = ["https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/1/mark-melbourne.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/3/4.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/5/alanreid.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/7/9.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/6/joshua-jackson-fringes-faces-of-fox-campaign-02.JPG", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/11/13.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/9/suits_cast_rachel.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/10/12.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/12/14.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/18/20.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/13/Gabriel_Macht_3241.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/14/16.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/15/17.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/16/21.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/17/19.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/19/21.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/20/22.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/21/24.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/22/rick-hoffman-as-louis-litt.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/23/3.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/24/square-holding-meghan-markle-suits.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/4/5.jpg", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/8/Characters_mike_ross_usa_network_gallery_khaki_shirt_03.png", "https://squad-up-bucket.s3.amazonaws.com/uploads/user/profile_picture/2/10129_1227084712608_1093750327_725452_821210_n.jpg"]
 
 User.all.each_with_index do |user,i|
   user.remote_profile_picture_url = arr[i]
