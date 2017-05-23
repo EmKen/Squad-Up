@@ -1,30 +1,41 @@
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6 index_biege middle">
-			<br>
-			<div class="herotext"> All Projects! </div>
-			<div class="subtext"> View all projects your company is working on </div>
-			<div class="subtext"> Get mentorship here. </div>
-		</div>
-		<div class="col-md-6 index_blue3 middle">
-			<%= image_tag "index_skill.png", class:"my-img center-block"  %>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-6 index_biege middle">
+      <br>
+      <div class="herotext">
+        All Projects
+      </div>
+        <div class="subtext">
+          View all projects your company is working on.
+        </div>
+    </div>
+    <div class="col-md-6 index_blue3 middle">
+      <%= image_tag "projects_top.png", class:"my-img center-block"  %>
+    </div>
+  </div>
 </div>
-<div class="container-fluid">
-	<div class="row">
+<div class="container-fluid index_darkblue">
+  <div class="container-fluid">
+    <div class="row">
       <% @projects.each do |project| %>
       <div class="col-md-3">
-      <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card" style="height: 250px">
+        <%= image_tag "projects.png", class: "card_img" %>
+        <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form skills_card project-card">
+          <div>
+            <h2 class="pmd-card-title-text">
+              <%= project.title %>
+            </h2>
+            <span class="pmd-card-subtitle-text">
+              <%= project.description %>
+            </span>
+          </div>
+          <div>
+                <%= button_to "See Project", project_path(project), method: :get, class:"btn pmd-ripple-effect btn-primary  btn-md skill_element skills_button_proj "%>
+          </div>
+        </div>
+      </div>
 
-          <h2 class="pmd-card-title-text">
-            <%= project.title %>
-          </h2>
-          <span class="pmd-card-subtitle-text">
-            <%= project.description %>
-          </span>
-        </div>
-        </div>
       <%end%>
-	</div>
+    </div>
+  </div>
 </div>

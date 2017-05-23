@@ -63,6 +63,18 @@ background-color: #2C3E50;
 height: 400px;
 }
 
+.project-card {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  justify-content: space-between;
+}
+.skills_button_proj {
+  width: 100%;
+  bottom: 13px;
+}
+
 .row_darkblue {
 background-color: #2C3E50;
 }

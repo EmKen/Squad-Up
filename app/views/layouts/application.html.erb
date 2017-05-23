@@ -1,62 +1,86 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title>SquadUp</title>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>SquadUp</title>
+    <%= csrf_meta_tags %>
 
-  <!-- Open Sans login-->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Open Sans login-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-  <!--Google Icon Font-->
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= action_cable_meta_tag %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 
-<body>
-  <% if signed_in? %>
+  <body>
+    <% if signed_in? %>
 
-    <!-- Bootstrap basic Navbar -->
-    <nav class="navbar1 navbar-inverse parallax_nav" >
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+
+  <!-- Bootstrap basic Navbar -->
+  <nav class="navbar1 navbar-inverse parallax_nav" >
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-          </button>
-          <!-- Joseph put brand here -->
-          <%= image_tag("company_logo.png", size:'60x60') %>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <%= image_tag("company_logo.png", size:'60x60') %>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-          <ul class="nav navbar-nav navbar-right">
-          <%= button_to "Sign Out", sign_out_path, method: :delete, class:"btn btn-primary btn-md btn-block"%>
+        <ul class="nav navbar-nav navbar-right">
+          <%= button_to "Sign Out", sign_out_path, method: :delete, class:"btn btn-primary btn-md btn-block" %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <%= button_to "Training", skills_path, method: :get, class:"btn btn-primary btn-md btn-block" %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <%= button_to "Profile", user_path(current_user), method: :get, class:"btn btn-primary btn-md btn-block" %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <%= button_to "All Projects", projects_path, method: :get, class:"btn btn-primary btn-md btn-block" %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right dropdown">
+          
+          <% count = current_user.notifications.where(read_status:0).count %>
+          <button type="button" class="btn btn-primary btn-md btn-block dropdown-toggle notification-button" data-toggle="dropdown">Notifications (<%=count%>)</button>
+          <ul class="dropdown-menu append-notification-dropdown">
+            <% if count === 0 %>
+              <li class='default-notification'>
+                <a>You have no new notifications for now.</a>
+              </li>
+            <% else %>
+              <% unread_notification_ordered_list.each do |n| %>
+                <li><%= link_to n.notification_message, notification_path(n) %></li>
+              <% end %>
+            <% end %>
+            <% read_notification_ordered_list.each do |n| %>
+              <li class="read-notification"><%= n.notification_message %></li>
+            <% end %>
+        
           </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <%= button_to "Training", skills_path, method: :get, class:"btn btn-primary btn-md btn-block"%>
-            </ul>
-          <ul class="nav navbar-nav navbar-right">
-          <%= button_to "Profile", user_path(current_user), method: :get, class:"btn btn-primary btn-md btn-block"%>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-          <%= button_to "All Projects", projects_path, method: :get, class:"btn btn-primary btn-md btn-block"%>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
-    </div>
-  <% end %>
+        </ul>
 
-  <%= yield %>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+    <% end %>
+  <div id="flash">
+    <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
 
-</body>
+
+    <%= yield %>
+
+  </body>
 
 </html>

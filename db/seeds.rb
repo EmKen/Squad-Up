@@ -14,7 +14,6 @@ user = {}
 user['password'] = 'password'
 departments = ["Sales", "Marketing", "Finance"]
 
-
 ActiveRecord::Base.transaction do
 	Company.create(name: "Next Academy", admin_email: "b.jones@nextacademy.com")
 end
@@ -159,10 +158,12 @@ end
 
 ActiveRecord::Base.transaction do
 
+
   Mentorship.create(mentor_id:1,mentee_id:23,mentor_message:"See you soon at 23 :)",mentee_message:"Please mentor me :)", skill_id:User.find(1).skills.sample.id)
   Mentorship.create(mentor_id:1,mentee_id:22,mentor_message:"See you at 22:)",mentee_message:"Please mentor me :)", skill_id:User.find(1).skills.sample.id)
   Mentorship.create(mentor_id:5,mentee_id:1,mentor_message:"Okay",mentee_message:"Please mentor me :)",skill_id:User.find(5).skills.sample.id)
   Mentorship.create(mentor_id:10,mentee_id:1,mentor_message:"No problem",mentee_message:"Please mentor me :)",skill_id: User.find(10).skills.sample.id)
+
 
 end
 

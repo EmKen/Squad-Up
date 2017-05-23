@@ -1,7 +1,6 @@
 if ($('.error-message').length >= 1) {
-	$('.error-message').fadeOut('slow'); 
+	$('.error-message').fadeOut('slow');
 	$('.error-message').remove();
 }
-$('h1.full-name').before("<p class='error-message' style='display:none;'>Invalid file extension, only file of formats .jpg/ .jpeg/ .gif/ .png,/ .tiff are allowed.</p>")
+$('h1.full-name').before("<p class='error-message' style='display:none;'>There is no file chosen.</p>")
 $('.error-message').fadeIn('slow');
-																									 	
