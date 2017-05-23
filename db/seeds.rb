@@ -13,8 +13,8 @@ Faker::UniqueGenerator.clear
 user = {}
 user['password'] = 'password'
 departments = ["Sales", "Marketing", "Finance"]
-first_name = Faker::Name.first_name
-last_name = Faker::Name.unique.last_name
+first_name = "Audrey"
+last_name = "Ling"
 email = "#{first_name[0].downcase}.#{last_name.downcase}@nextacademy.com"
 
 ActiveRecord::Base.transaction do
@@ -164,8 +164,11 @@ end
 
 ActiveRecord::Base.transaction do
 
-  Mentorship.create(mentor_id:1,mentee_id:23,mentor_message:"See you soon at 23 :)")
-  Mentorship.create(mentor_id:1,mentee_id:22,mentor_message:"See you at 22:)")
+  Mentorship.create(mentor_id:1,mentee_id:23,mentor_message:"See you soon at 23 :)",mentee_message:"Please mentor me :)",skill_id:User.find(1).skills.sample.id)
+  Mentorship.create(mentor_id:1,mentee_id:22,mentor_message:"See you at 22:)",mentee_message:"Please mentor me :)",skill_id:User.find(1).skills.sample.id)
+  Mentorship.create(mentor_id:5,mentee_id:1,mentor_message:"See you at 22:)",mentee_message:"Please mentor me :)",,skill_id:User.find(5).skills.sample.id)
+  Mentorship.create(mentor_id:10,mentee_id:1,mentor_message:"See you at 22:)",mentee_message:"Please mentor me :)",,skill_id:User.find(10).skills.sample.id)
+
 
 end
 

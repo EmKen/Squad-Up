@@ -22,9 +22,9 @@
 // @import "http://propeller.in/components/card/css/card.css";
 
 .navbar {
-   background-color: transparent;
-   background: transparent;
-   border-color: transparent;
+ background-color: transparent;
+ background: transparent;
+ border-color: transparent;
 }
 
 .navbar {
@@ -42,22 +42,33 @@
 
 body {
   font-family: 'OpenSans';
- }
+}
 
 .parallax_nav {
-    /* The image used */
-    background-image: url("homeimage.png");
+  /* The image used */
+  background-image: url("homeimage.png");
 
-    /* Set a specific height */
-    min-height: 250px;
+  /* Set a specific height */
+  min-height: 250px;
 
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .each-contact {
   width: 200px;
+}
+
+.read-notification {
+  background-color: #c4d4ed;
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
 }
