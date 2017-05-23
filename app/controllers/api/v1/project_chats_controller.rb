@@ -2,7 +2,7 @@ class Api::V1::ProjectChatsController < Api::V1::ApplicationController
 	def create
 		chat = ProjectChat.new(project_id:params["project_id"].to_i,user_id:current_user.id,message:params["message"])
 		if chat.save
-      ActionCable.server.broadcast 'messages',
+      ActionCable.server.broadcast "messages_#{params["project_id"]}",
         chat_message_object: chat
       head :ok
 		else

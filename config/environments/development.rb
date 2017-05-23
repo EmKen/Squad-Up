@@ -54,4 +54,5 @@ Rails.application.configure do
 
   config.allowed_request_origins = ['http://192.168.1.114:3000']
   config.action_cable.disable_request_forgery_protection = true
+  config.action_cable.url = "ws://localhost:3000/cable"
 end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/:notification_id' => "notifications#show", as: "notification"
+
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create]
