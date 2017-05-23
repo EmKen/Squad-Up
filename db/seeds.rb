@@ -143,18 +143,25 @@ ActiveRecord::Base.transaction do
   ids = (1..36).to_a.sample(rand(5)+3)
   Project.create(project_owner_id: 17, title: "Pressure Monitor", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
   ids = (1..36).to_a.sample(rand(5)+3)
-  Project.create(project_owner_id: 18, title: "Digital Programmable Dark Room Controller", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  Project.create(project_owner_id: 18, title: "Digital Programmable Dark Room Controller", description: "Private project, subcontract with danata Dubai", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:18))
   ids = (1..36).to_a.sample(rand(5)+3)
-  Project.create(project_owner_id: 19, title: "Object Counter for Industrial Application", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  Project.create(project_owner_id: 19, title: "Object Counter for Industrial Application", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:19))
   ids = (1..36).to_a.sample(rand(5)+3)
-  Project.create(project_owner_id: 20, title: "Universal Digital Function Generator", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  Project.create(project_owner_id: 20, title: "Universal Digital Function Generator", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:20))
   ids = (1..36).to_a.sample(rand(5)+3)
-  Project.create(project_owner_id: 21, title: "Automatic Spray Painting Gun", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  Project.create(project_owner_id: 21, title: "Automatic Spray Painting Gun", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:21))
   ids = (1..36).to_a.sample(rand(5)+3)
-  Project.create(project_owner_id: 22, title: "Motor Speed Controller", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3))
+  users = User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:22)
+  Project.create(project_owner_id: 22, title: "Motor Speed Controller", description: "Private project, subcontract, Malaysian airline", skills: Skill.where(id: ids), status: "approved", users: User.joins(:skills).where({skills: {id: ids}}).limit(rand(3)+3)-User.where(id:22))
+  ids.each do |id|
+    ProjectSkill.create(user)
+  end
 
 end
 
+ActiveRecord::Base.transaction do
+  Por
+end
 
 ActiveRecord::Base.transaction do
 
