@@ -165,10 +165,6 @@ ActiveRecord::Base.transaction do
   end
 end
 
-ActiveRecord::Base.transaction do
-  Por
-end
-
 
 
 ActiveRecord::Base.transaction do
