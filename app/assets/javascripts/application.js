@@ -17,3 +17,4 @@
 //= require cable
 //= require propeller.min
 //= require users
+//= require session

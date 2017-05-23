@@ -115,8 +115,9 @@
               <% if @user.projects.exists? %>
                 <% @user.project_team_members.each do |p| %>
                   <tr class="row">
-                    <td class="col-md-6"><%= link_to p.project.title, project_path(p.project) %></td>
-                    <td class="col-md-6"><%= p.project_skill.skill.skill_name %></td>
+                    <td class="col-md-4"><%= link_to p.project.title, project_path(p.project) %></td>
+                    <td class="col-md-4"><%= p.project_skill.skill.skill_name %></td>
+                    <td class="col-md-4"><%= p.status.titleize %></td>
                   </tr>
                 <% end %>
               <% end %>

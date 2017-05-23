@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       post '/mentorships/accept_mentee' => 'mentorships#accept_mentee'
       get '/mentorships/mentor' => 'mentorships#mentor'
       get '/mentorships/mentee' => 'mentorships#mentee'
-      
+
       get '/projects/:project_id' => 'projects#show'
     end
   end
@@ -52,6 +52,9 @@ Rails.application.routes.draw do
   get "users/:id/skills" => "users#skills", as: "user_skills"
   post "users/:id/add_skills" => "users#add_skills", as: "add_user_skills"
 
+  # fake send email
+
+  get '/send_email' => "emails#send_email", as: "send_email"
 
   resources :skills, only: [:index, :create, :show]
 
