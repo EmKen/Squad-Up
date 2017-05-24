@@ -23,43 +23,78 @@
         <%= @user.job_title %>
       </h3><br>
       <div>
-        <% if @user == current_user %>
-            <%= button_to "Edit Your Skillset", user_skills_path(@user), method: :get, class:"btn btn-primary btn-md btn-block"%>
-            <br><br><br>
-            <div class="project-show">
-            <h1 class="projects_header_bk text-center">
-              <%= "Your projects" %>
-            </h1>
-            <hr>
-            <% if @user.projects.exists? || @user.managed_projects.exists? %>
-              <table>
-                <tr class="row">
-                  <th class="col-md-6 projects_sub_bk">Project</th>
-                  <th class="col-md-6 projects_sub_bk">Role</th>
-                </tr>
-                <% if @user.managed_projects.exists? %>
-                  <% @user.managed_projects.each do |project| %>
-                    <tr class="row">
-                      <td class="col-md-6"><%= link_to project.title, project_path(project) %></td>
-                      <td class="col-md-6">Project owner</td>
-                    </tr>
+          <% if @user == current_user %>
+              <%= button_to "Edit Your Skillset", user_skills_path(@user), method: :get, class:"btn btn-primary btn-md btn-block"%>
+              <br><br><br>
+              <div class="project-show">
+              <h1 class="projects_header_bk text-center">
+                <%= "Your projects" %>
+              </h1>
+              <hr>
+              <% if @user.projects.exists? || @user.managed_projects.exists? %>
+                <table>
+                  <tr class="row">
+                    <th class="col-md-6 projects_sub_bk">Project</th>
+                    <th class="col-md-6 projects_sub_bk">Role</th>
+                  </tr>
+                  <% if @user.managed_projects.exists? %>
+                    <% @user.managed_projects.each do |project| %>
+                      <tr class="row">
+                        <td class="col-md-6"><%= link_to project.title, project_path(project) %></td>
+                        <td class="col-md-6">Project owner</td>
+                      </tr>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <% if @user.projects.exists? %>
-                  <% @user.project_team_members.each do |p| %>
-                    <tr class="row">
-                      <td class="col-md-6"><%= link_to p.project.title, project_path(p.project) %></td>
-                      <td class="col-md-6"><%= p.project_skill.skill.skill_name %></td>
-                    </tr>
+                  <% if @user.projects.exists? %>
+                    <% @user.project_team_members.each do |p| %>
+                      <tr class="row">
+                        <td class="col-md-6"><%= link_to p.project.title, project_path(p.project) %></td>
+                        <td class="col-md-6"><%#= p.project_skill.skill.skill_name %><%= "test" %></td>
+                      </tr>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </table>
-            <% else %>
-              <h1>You are not part of any projects, why not start one?</h1>
+                </table>
+              <% else %>
+                <h1>You are not part of any projects, why not start one?</h1>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <h1 class="projects_header_bk text-center">Your mentor requests</h1>
+        <hr>
+        <% if @user.mentors.exists? %>
+            <% @user.mentors.each do |user| %>
+              <tr class="row">
+                <td class="col-md-6"> <%= "#{user.first_name} #{user.last_name}"%> </td>
+                <td class="col-md-6"> <%= user.department %> </td>
+              </tr>
             <% end %>
-          </div>
+          <% else %>
+          <h4> No mentor requests </h4>
         <% end %>
-      </div>
+        <h1 class="projects_header_bk text-center">Requests for your mentorship</h1>
+        <hr>
+        <% if @user.mentees.exists? %>
+            <% @user.mentees.each do |user| %>
+              <div class="row">
+                <div class="col-md-6"> <%= "#{user.first_name} #{user.last_name}"%> </div>
+                <div class="col-md-4"> <%=  user.first_name %> </div>
+                <div class="col-md-2"> <%=  user.first_name %> </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"> <%= "#{user.first_name} #{user.last_name}"%> </div>
+                <div class="col-md-4"> <%=  user.first_name %> </div>
+                <div class="col-md-2"> <%=  user.first_name %> </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"> <%= "#{user.first_name} #{user.last_name}"%> </div>
+                <div class="col-md-4"> <%=  user.first_name %> </div>
+                <div class="col-md-2"> <%=  user.first_name %> </div>
+              </div>
+            <% end %>
+          <% else %>
+          <h4> No requests for mentorship </h4>
+        <% end %>
     </div>
 
     <div class="col-sm-6">
@@ -241,6 +276,6 @@
       </div>
     <% end %>
   </div>
-<% end %>  
+<% end %>
 
 <br><br><br><br><br><br>
