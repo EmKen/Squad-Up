@@ -1,0 +1,1 @@
+$('#flash').html('<%= j "#{@mentorship.errors.full_messages.join(". ")}." %>').addClass("alert alert-danger")

@@ -15,5 +15,7 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
     if (count === 1) {
       $('.default-notification').hide();
     };
+    $('#flash').html(data.message).addClass("alert alert-info");
+    setTimeout(function(){$('#flash').fadeOut('slow')},3000)
   }
 });

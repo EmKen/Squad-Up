@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'notifications/:notification_id' => "notifications#show", as: "notification"
 
   namespace :api do
@@ -38,7 +39,9 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update ]
   end
 
-  resources :mentorships
+  resources :mentorships, only: [:create]
+  post '/accept_mentee/:mentorship_id' => "mentorships#accept_mentee", as: "accept_mentee"
+
 
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
