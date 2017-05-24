@@ -1,1 +1,3 @@
+var id = <%= @mentorship.id %>
+$('#mentorship_' + id).
 $('#flash').html('<%= j "#{@mentorship.errors.full_messages.join(". ")}." %>').addClass("alert alert-danger")
