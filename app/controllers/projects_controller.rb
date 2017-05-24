@@ -102,6 +102,22 @@ class ProjectsController < ApplicationController
 		redirect_to @project
 	end
 
+	def invite_approve
+		invite = ProjectTeamMember.find(params[:invite_id])
+		invite.status = "confirmed"
+		if invite.save
+			redirect_to "/"
+		end
+	end
+	
+	def invite_refuse
+		invite = ProjectTeamMember.find(params[:invite_id])
+		invite.status = "invite_refused"
+		if invite.save
+			redirect_to "/"
+		end
+	end
+
 	def edit_skills
 		@project = Project.find(params[:id])
 	end
