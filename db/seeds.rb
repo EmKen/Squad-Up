@@ -72,7 +72,7 @@ ActiveRecord::Base.transaction do
   Skill.create(category: "Accounting", skill_name: "Budgeting", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Accounting", skill_name: "Business Analytics", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Accounting", skill_name: "Auditing", users: User.where(id: user_ids.sample(rand(5)+2)))
-  Skill.create(category: "Accounting", skill_name: "Cash Flow Management", users: User.where(id: user_ids.sample(rand(5)+1)))
+  Skill.create(category: "Accounting", skill_name: "Cash Flow Management", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Accounting", skill_name: "MS Excel", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Management", skill_name: "Coordination", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Management", skill_name: "Conflict Resolution", users: User.where(id: user_ids.sample(rand(5)+2)))
@@ -100,10 +100,11 @@ ActiveRecord::Base.transaction do
   Skill.create(category: "Education", skill_name: "Evaluating Performance", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Education", skill_name: "Delivery of Material", users: User.where(id: user_ids.sample(rand(5)+2)))
   Skill.create(category: "Education", skill_name: "Setting Expectations", users: User.where(id: user_ids.sample(rand(5)+2)))
-  Skill.create(category: "Other", skill_name: "Teamwork", users: User.where(id: user_ids.sample(rand(5)+2)))
-  Skill.create(category: "Other", skill_name: "Research", users: User.where(id: user_ids.sample(rand(5)+2)))
-  Skill.create(category: "Other", skill_name: "Verbal Communication", users: User.where(id: user_ids.sample(rand(5)+2)))
-  Skill.create(category: "Other", skill_name: "Negotiating", users: User.where(id: user_ids.sample(rand(5)+2)))
+  Skill.create(category: "Other", skill_name: "Event Planning", users: User.where(id: user_ids.sample(rand(5)+2)))
+  Skill.create(category: "Other", skill_name: "Video Editing", users: User.where(id: user_ids.sample(rand(5)+2)))
+  Skill.create(category: "Other", skill_name: "Physio Theraphy", users: User.where(id: user_ids.sample(rand(5)+2)))
+  Skill.create(category: "Other", skill_name: "Writing", users: User.where(id: user_ids.sample(rand(5)+2)))
+
 end
 
 
