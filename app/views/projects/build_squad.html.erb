@@ -41,7 +41,7 @@
 									<table>
 										<tr>	
 											<td width="1000">
-												<%= "#{user.first_name} #{user.last_name}" %>
+												<%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
 											</td>
 											<td>
   											<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]"}, user.id, nil %>
