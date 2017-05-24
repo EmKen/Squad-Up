@@ -73,4 +73,36 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  # config.model Company do
+  #   field :users do
+  #     associated_collection_cache_all false  # REQUIRED if you want to SORT the list as below
+  #     associated_collection_scope do
+  #       company = bindings[:object]
+  #       Proc.new { |scope|
+  #         scope = scope.where(user_id: current_user.company_id) 
+  #       }
+  #     end
+  #   end
+  # end
+
+  # config.model User do
+  #   field :users do
+  #     associated_collection_cache_all false  
+  #     associated_collection_scope do
+  #       # bindings[:object] & bindings[:controller] are available, but not in scope's block!
+  #       # team = bindings[:object]
+  #       Proc.new { |scope|
+  #         # scoping all Players currently, let's limit them to the team's league
+  #         # Be sure to limit if there are a lot of Players and order them by position
+  #         scope = scope.where(company_id: current_user.company_id)
+  #         # scope = scope.limit(30) # 'order' does not work here
+  #       }
+  #     end
+  #   end
+  # end
+
+  config.excluded_models << Company
+
+
 end
