@@ -37,16 +37,21 @@
 						</br>
 						<% skill.users.where.not(id: current_user.id).each do |user| %>
 							<div>
-								<table>
-									<tr>
-										<td width ="200">
-											<%= form.label :users, "#{user.first_name} #{user.last_name}" %>
-										</td>
-										<td>
-											<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]"}, user.id, nil %>
-										</td>
-									</tr>
-								</table>
+								<label>
+									<table>
+										<tr>	
+											<td width="1000">
+												<%= "#{user.first_name} #{user.last_name}" %>
+											</td>
+											<td>
+  											<%= form.check_box :users, { multiple: true, name: "#{skill.id}[]"}, user.id, nil %>
+  										</td>
+  										<td>
+  											&nbsp;&nbsp;&nbsp;
+  										</td>
+										</tr>
+									</table>
+								</label>
 							</div>
 						<% end %>
 						<hr>
