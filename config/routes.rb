@@ -54,6 +54,8 @@ Rails.application.routes.draw do
   patch "projects/:id/update_skills" => "projects#update_skills", as: "update_project_skills"
   get "users/:id/skills" => "users#skills", as: "user_skills"
   post "users/:id/add_skills" => "users#add_skills", as: "add_user_skills"
+  get "projects/:invite_id/invite_approve" => "projects#invite_approve", as: "invite_approve"
+  get "projects/:invite_id/invite_refuse" => "projects#invite_refuse", as: "invite_refuse"
 
   # fake send email
 
